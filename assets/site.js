@@ -24,6 +24,44 @@
     });
   }
 
+  // photo placeholders — a photo fades in only once it has actually loaded, and
+  // an <img> whose file isn't there yet is dropped, leaving the initials disc /
+  // captioned tile underneath. Add the real file at the src path and it appears.
+  // (Without JS the images simply show as normal — see .js rules in styles.css.)
+  document.documentElement.classList.add('js');
+  document.querySelectorAll('.person-photo img, .shot-img img, .video-thumb img').forEach(function (img) {
+    function fail() {
+      // video thumbs carry a smaller YouTube size to fall back to before giving up
+      var alt = img.getAttribute('data-fallback');
+      if (alt) { img.removeAttribute('data-fallback'); img.src = alt; return; }
+      if (img.parentNode) img.parentNode.removeChild(img);
+    }
+    function ok() {
+      // YouTube answers a missing maxres thumbnail with a tiny grey placeholder
+      // rather than a 404, so treat an implausibly small image as a miss too
+      if (img.getAttribute('data-fallback') && img.naturalWidth < 200) { fail(); return; }
+      img.classList.add('is-loaded');
+    }
+    img.addEventListener('load', ok);
+    img.addEventListener('error', fail);
+    if (img.complete) { img.naturalWidth > 0 ? ok() : fail(); }
+  });
+
+  // videos load only on click — nothing is requested from YouTube before that
+  document.querySelectorAll('.video').forEach(function (card) {
+    var btn = card.querySelector('.video-thumb');
+    if (!btn || !card.dataset.yt) return;
+    btn.addEventListener('click', function () {
+      var frame = document.createElement('iframe');
+      frame.className = 'video-frame';
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + card.dataset.yt + '?autoplay=1&rel=0';
+      frame.title = btn.getAttribute('aria-label') || 'Video';
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.allowFullscreen = true;
+      btn.replaceWith(frame);
+    });
+  });
+
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && items.length) {

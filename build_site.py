@@ -9,9 +9,9 @@ ADDRESS = "Jalandhar, Punjab 144001, India"
 
 NAV = [
     ("schools.html", "For Schools"),
+    ("colleges.html", "For Colleges"),
     ("universities.html", "For Universities"),
     ("programs.html", "For Students"),
-    ("franchise.html", "Franchise"),
     ("about.html", "About"),
     ("contact.html", "Contact"),
 ]
@@ -20,7 +20,9 @@ ICONS = {
     "school": '<path d="M3 9.5 12 4l9 5.5-9 5.5-9-5.5Z"/><path d="M7 12.4V17c0 1.2 2.2 2.4 5 2.4s5-1.2 5-2.4v-4.6"/><path d="M21 9.5V15"/>',
     "campus": '<path d="M4 20V9.6L12 5l8 4.6V20"/><path d="M9.5 20v-5.2h5V20"/><path d="M2.5 20h19"/>',
     "student": '<path d="M12 3 2.8 7.8 12 12.6l9.2-4.8L12 3Z"/><path d="M6.4 10.2v4.6c0 1.7 2.5 3.1 5.6 3.1s5.6-1.4 5.6-3.1v-4.6"/><path d="M21.2 7.8v5.4"/>',
-    "franchise": '<path d="M3.5 9.2 5 4.8h14l1.5 4.4a2.6 2.6 0 0 1-4.9 1.5 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-2.5-1.5Z"/><path d="M5 11.5V20h14v-8.5"/><path d="M10 20v-5h4v5"/>',
+    "college": '<path d="M12 3.2 3.4 7.6h17.2L12 3.2Z"/><path d="M6 10.4v6.4M10 10.4v6.4M14 10.4v6.4M18 10.4v6.4"/><path d="M4.2 16.8h15.6M2.8 20.4h18.4"/>',
+    "project": '<path d="M4.5 6.4A1.9 1.9 0 0 1 6.4 4.5h3.1l1.7 2.4h6.4a1.9 1.9 0 0 1 1.9 1.9v8.7a1.9 1.9 0 0 1-1.9 1.9H6.4a1.9 1.9 0 0 1-1.9-1.9V6.4Z"/><path d="m9.6 13.4 1.9 1.9 3.4-3.9"/>',
+    "chain": '<path d="M10.1 13.9a3.6 3.6 0 0 0 5.4.4l2.4-2.4a3.6 3.6 0 0 0-5.1-5.1l-1.4 1.4"/><path d="M13.9 10.1a3.6 3.6 0 0 0-5.4-.4l-2.4 2.4a3.6 3.6 0 0 0 5.1 5.1l1.4-1.4"/>',
     "chip": '<rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>',
     "book": '<path d="M4 5.2A2.2 2.2 0 0 1 6.2 3H19v14.6H6.2A2.2 2.2 0 0 0 4 19.8V5.2Z"/><path d="M4 19.8A2.2 2.2 0 0 0 6.2 22H19"/>',
     "teacher": '<circle cx="12" cy="7.5" r="3.4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
@@ -85,15 +87,16 @@ FOOTER = f"""</main>
       <div>
         <h5>Work with us</h5>
         <a href="schools.html">For Schools</a>
+        <a href="colleges.html">For Colleges</a>
         <a href="universities.html">For Universities</a>
         <a href="programs.html">For Students &amp; Parents</a>
-        <a href="franchise.html">Franchise Partners</a>
       </div>
       <div>
         <h5>Company</h5>
         <a href="about.html">About AST</a>
-        <a href="about.html#thesis">Our thesis</a>
-        <a href="about.html#partners">Partnerships</a>
+        <a href="index.html#projects">Active projects</a>
+        <a href="index.html#advisors">Advisory board</a>
+        <a href="index.html#media">Talks &amp; media</a>
         <a href="contact.html">Contact</a>
       </div>
       <div>
@@ -117,19 +120,19 @@ FOOTER = f"""</main>
 
 PAGES = [
     ("index.html", "AST Ventures — AI Skills &amp; Training | Building Punjab's next tech hub",
-     "AST Ventures builds AI skills infrastructure for Punjab and tier-2 and tier-3 India: AI labs for schools, Centres for Applied AI on university campuses, career programs for students, and franchise AI centres."),
+     "AST Ventures builds AI skills infrastructure for Punjab and tier-2 and tier-3 India: AI labs for schools, NEP-aligned programs for colleges, Centres for Applied AI on university campuses, and career programs for students."),
     ("schools.html", "AI Campus-in-a-Box for Schools | AST Ventures",
      "Meet the CBSE AI mandate properly. AST Ventures installs the lab, the curriculum and the trained teachers, run on our platform — for schools across Punjab."),
+    ("colleges.html", "NEP-aligned AI &amp; Blockchain programs for Colleges | AST Ventures",
+     "Credit-bearing AI and blockchain courses for degree and polytechnic colleges, delivered under NEP 2020 — taught by industry trainers, with faculty enablement built in."),
     ("universities.html", "Centre for Applied AI for Universities | AST Ventures",
      "An industry-grade Centre for Applied AI on your campus, badged with your institution. Curriculum, labs, faculty enablement and placement-ready student projects."),
     ("programs.html", "AI Career Program &amp; Young AI Innovators | AST Ventures",
      "Learn at the AST flagship in Jalandhar: a 6-month AI Career Program for graduates and Young AI Innovators weekend batches for school students."),
-    ("franchise.html", "AI Centre Franchise Opportunity | AST Ventures",
-     "License the AST model and run an AI learning centre in your city. Curriculum, platform, teacher training, brand and launch support included."),
     ("about.html", "About AST Ventures | The thesis behind AI-native education in India",
      "We are building the operating system for AI-native education in India, starting from Jalandhar, Punjab — where India's AI mandate lands first."),
     ("contact.html", "Contact AST Ventures | Jalandhar, Punjab",
-     "Talk to the AST Ventures team about school labs, university centres, student programs or franchise partnerships."),
+     "Talk to the AST Ventures team about school labs, NEP college courses, university centres or student programs."),
 ]
 
 

@@ -339,6 +339,138 @@ p{margin:0 0 1.1em}
   .btn:hover,.card:hover{transform:none}
 }
 
+/* ---------- credibility strip ---------- */
+.strip{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:20px 0}
+.strip .wrap{display:flex;align-items:center;gap:clamp(16px,3vw,40px);flex-wrap:wrap}
+.strip-label{margin:0;font-family:'Jakarta',sans-serif;font-size:.72rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.strip-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;
+  gap:clamp(14px,2.6vw,34px);align-items:center}
+.strip-list li{font-family:'Jakarta',sans-serif;font-weight:700;font-size:.97rem;
+  color:var(--navy);opacity:.8;position:relative}
+.strip-list li+li::before{content:'';position:absolute;left:calc(clamp(14px,2.6vw,34px)/-2);
+  top:50%;width:4px;height:4px;border-radius:50%;background:var(--line);transform:translateY(-50%)}
+
+/* ---------- active project ---------- */
+.project{display:grid;grid-template-columns:1.55fr .95fr;margin-top:48px;background:#fff;
+  border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md)}
+@media(max-width:900px){.project{grid-template-columns:1fr}}
+.project-main{padding:clamp(28px,3.6vw,46px)}
+.project-main h3{font-size:clamp(1.35rem,2.4vw,1.75rem);margin-bottom:.5em}
+.project-team{background:linear-gradient(165deg,var(--sky-2),var(--sky));
+  border-left:1px solid var(--line);padding:clamp(26px,3vw,36px);display:flex;flex-direction:column}
+@media(max-width:900px){.project-team{border-left:0;border-top:1px solid var(--line)}}
+.project-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.project-status{display:inline-flex;align-items:center;gap:8px;font-family:'Jakarta',sans-serif;
+  font-size:.71rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0C6E43;
+  background:#E7F7EF;border:1px solid #BFE8D4;padding:6px 13px;border-radius:100px}
+.pulse{width:7px;height:7px;border-radius:50%;background:#12A05F;animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(18,160,95,.5)}70%{box-shadow:0 0 0 7px rgba(18,160,95,0)}
+  100%{box-shadow:0 0 0 0 rgba(18,160,95,0)}}
+.project-meta{font-family:'Jakarta',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted)}
+.team-title{font-family:'Jakarta',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+
+/* ---------- people (advisors, team) ---------- */
+.people{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:860px){.people{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.people{grid-template-columns:1fr}}
+.person{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;
+  border:1px solid var(--line);border-radius:var(--radius);padding:32px 26px;box-shadow:var(--shadow-sm);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.person:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#C7DBF8}
+.person b{font-family:'Jakarta',sans-serif;font-weight:700;font-size:1.06rem;color:var(--navy);line-height:1.3}
+.person-role{font-size:.87rem;color:var(--muted);margin-top:4px}
+.person-photo{position:relative;flex:0 0 auto;width:72px;height:72px;border-radius:50%;overflow:hidden;
+  display:grid;place-items:center;color:#fff;font-family:'Jakarta',sans-serif;font-weight:800;
+  font-size:1.12rem;letter-spacing:.03em;
+  background:linear-gradient(150deg,var(--blue-light),var(--blue-dark));
+  box-shadow:0 8px 18px rgba(31,111,235,.24)}
+.person-photo::before{content:attr(data-initials)}
+.person-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* with JS on, a photo only appears once it has really loaded — so a missing
+   file shows the placeholder underneath rather than a broken-image flash */
+.js .person-photo img,.js .shot-img img,.js .video-thumb img{opacity:0;transition:opacity .35s var(--ease)}
+.js .person-photo img.is-loaded,.js .shot-img img.is-loaded,.js .video-thumb img.is-loaded{opacity:1}
+.person-photo--lg{width:104px;height:104px;font-size:1.62rem;margin-bottom:20px}
+/* row variant — inside the project team panel */
+.person--row{flex-direction:row;align-items:center;text-align:left;gap:14px;background:transparent;
+  border:0;border-top:1px solid #D9E7FA;border-radius:0;box-shadow:none;padding:14px 0}
+.person--row:first-of-type{border-top:0}
+.person--row:hover{transform:none;box-shadow:none}
+.person-text{display:flex;flex-direction:column;min-width:0}
+
+/* ---------- session gallery ---------- */
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:24px}
+.shot{display:block;margin:0;color:inherit;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.shot:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#C7DBF8}
+.shot-body{display:flex;flex-direction:column;gap:3px;padding:20px 22px 23px}
+.ext{display:inline-block;color:var(--blue);font-weight:700;transition:transform .25s var(--ease)}
+.shot:hover .ext,.linkcard:hover .linkcard-go{transform:translate(2px,-2px)}
+.shot-img{position:relative;display:grid;place-items:center;aspect-ratio:4/3;overflow:hidden;
+  background:linear-gradient(155deg,var(--navy),#123A8F 58%,var(--blue))}
+.shot-img::before{content:attr(data-label);padding:0 20px;text-align:center;
+  font-family:'Jakarta',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.55)}
+.shot-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shot-tag{font-family:'Jakarta',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blue)}
+.shot b,.video-body b{font-family:'Jakarta',sans-serif;font-weight:700;font-size:1.02rem;
+  color:var(--navy);line-height:1.35}
+.shot-where{font-size:.88rem;color:var(--muted)}
+
+/* ---------- video cards (click to play) ---------- */
+.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.video{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.video:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#C7DBF8}
+.video-thumb{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:16/9;padding:0;
+  border:0;cursor:pointer;overflow:hidden;
+  background:linear-gradient(155deg,var(--navy),#123A8F 58%,var(--blue))}
+/* label sits at the foot of the tile so it never collides with the play button */
+.video-thumb::before{content:attr(data-label);position:absolute;left:0;right:0;bottom:14px;
+  padding:0 18px;text-align:center;
+  font-family:'Jakarta',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.15em;
+  text-transform:uppercase;color:rgba(255,255,255,.55)}
+.video-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.video-play{position:relative;z-index:1;grid-area:1/1;width:58px;height:58px;border-radius:50%;
+  background:rgba(255,255,255,.94);box-shadow:0 8px 24px rgba(10,33,69,.34);
+  display:grid;place-items:center;transition:transform .25s var(--ease),background .2s}
+.video-play::after{content:'';border-style:solid;border-width:9px 0 9px 15px;
+  border-color:transparent transparent transparent var(--blue);margin-left:4px}
+.video-thumb:hover .video-play{transform:scale(1.09);background:#fff}
+.video-frame{display:block;width:100%;aspect-ratio:16/9;border:0}
+.video-body{display:flex;flex-direction:column;gap:3px;padding:19px 22px 22px}
+
+/* ---------- outbound link cards ---------- */
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:24px}
+.linkcard{position:relative;display:flex;flex-direction:column;gap:4px;color:inherit;background:#fff;
+  border:1px solid var(--line);border-radius:var(--radius);padding:24px 46px 24px 24px;
+  box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.linkcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:#C7DBF8}
+.linkcard-tag{display:flex;align-items:center;gap:9px;font-family:'Jakarta',sans-serif;font-size:.7rem;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.linkcard b{font-family:'Jakarta',sans-serif;font-weight:700;font-size:1.02rem;color:var(--navy);line-height:1.35}
+.linkcard-note{font-size:.88rem;color:var(--muted)}
+.linkcard-go{position:absolute;top:22px;right:22px;color:var(--blue);font-weight:700;
+  transition:transform .25s var(--ease)}
+.pill-soon{font-size:.62rem;letter-spacing:.1em;color:#0C6E43;background:#E7F7EF;
+  border:1px solid #BFE8D4;border-radius:100px;padding:3px 8px}
+
+/* ---------- accessibility polish ---------- */
+::selection{background:rgba(31,111,235,.16);color:var(--navy)}
+a:focus-visible,button:focus-visible,summary:focus-visible,
+input:focus-visible,select:focus-visible,textarea:focus-visible{
+  outline:2px solid var(--blue);outline-offset:3px;border-radius:8px}
+@media(prefers-reduced-motion:reduce){
+  .pulse{animation:none}
+  .person:hover,.shot:hover{transform:none}
+}
+
 /* misc */
 .note{background:var(--sky-2);border:1px solid var(--line);border-left:3px solid var(--blue);
   border-radius:12px;padding:18px 22px;font-size:.92rem;color:var(--muted)}
@@ -354,19 +486,19 @@ p{margin:0 0 1.1em}
 <div class="preview-bar">Single-file preview &mdash; all seven pages, click the navigation</div>
 <header class="header"><div class="wrap header-inner">
   <a class="brand" href="index.html" aria-label="AST Ventures home"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NDIuNTQgODguMDAiIHdpZHRoPSI1NDIuNTQiIGhlaWdodD0iODguMDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQVNUIFZlbnR1cmVzIOKAlCBBSSBTa2lsbHMgYW5kIFRyYWluaW5nIj48Zz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFzdGdoMSIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzQjg2RjciLz48c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iIzFGNkZFQiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEyM0E4RiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4OC4wMCIgaGVpZ2h0PSI4OC4wMCIgcng9IjI0LjAwIiBmaWxsPSJ1cmwoI2FzdGdoMSkiLz48cGF0aCBkPSJNIDMwLjUwIDU0LjAwIEwgNTcuNTAgNTQuMDAiIHN0cm9rZT0iI0E5Q0JGRiIgc3Ryb2tlLXdpZHRoPSI5LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNIDIwLjAwIDY4LjAwIEwgNDQuMDAgMjEuMDAgTCA2OC4wMCA2OC4wMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjkuNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwLjAwIiBjeT0iNjguMDAiIHI9IjkuNTAiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI2OC4wMCIgY3k9IjY4LjAwIiByPSI5LjUwIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMjAuMDAiIGN5PSI2OC4wMCIgcj0iNC4wMCIgZmlsbD0iIzFGNkZFQiIvPjxjaXJjbGUgY3g9IjY4LjAwIiBjeT0iNjguMDAiIHI9IjQuMDAiIGZpbGw9IiMxRjZGRUIiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE0LDYuMDApIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLDQyKSI+PHBhdGggZD0iTTAuNjQgMC4wMCAxNS4yNSAtNDMuMjFIMjcuMjBMNDEuODIgMC4wMEgzMi4wMkwyOS4xMiAtOC44MkgxMy4yOEwxMC4zOCAwLjAwWk0xNS43OCAtMTYuNjVIMjYuNjJMMjAuMDEgLTM3LjA2SDIyLjQ1WiBNNjEuMzEgMC43MFE1Ny4yNSAwLjcwIDUzLjY4IC0wLjc4UTUwLjExIC0yLjI2IDQ3LjUzIC00Ljk5UTQ0Ljk1IC03LjcxIDQzLjY3IC0xMS40M0w1MS4wNCAtMTQuNzNRNTIuNjYgLTExLjE5IDU1LjU0IC05LjE2UTU4LjQxIC03LjEzIDYxLjg5IC03LjEzUTYzLjc0IC03LjEzIDY1LjA4IC03LjcxUTY2LjQxIC04LjI5IDY3LjE2IC05LjMxUTY3LjkyIC0xMC4zMiA2Ny45MiAtMTEuNzJRNjcuOTIgLTEzLjIyIDY2Ljk5IC0xNC4zMFE2Ni4wNiAtMTUuMzcgNjQuMDkgLTE2LjAxTDU1LjYyIC0xOC43OVE1MC40NiAtMjAuNDcgNDcuODUgLTIzLjU4UTQ1LjI0IC0yNi42OCA0NS4yNCAtMzEuMDNRNDUuMjQgLTM0Ljg2IDQ3LjEyIC0zNy43NlE0OS4wMSAtNDAuNjYgNTIuNDAgLTQyLjI4UTU1LjgwIC00My45MSA2MC4yMCAtNDMuOTFRNjQuMDkgLTQzLjkxIDY3LjQwIC00Mi41N1E3MC43MCAtNDEuMjQgNzMuMTEgLTM4LjgwUTc1LjUyIC0zNi4zNyA3Ni43MyAtMzIuOTRMNjkuNDMgLTI5LjY0UTY4LjIxIC0zMi42NSA2NS43NyAtMzQuMzdRNjMuMzQgLTM2LjA4IDYwLjIwIC0zNi4wOFE1OC40MSAtMzYuMDggNTcuMDEgLTM1LjUwUTU1LjYyIC0zNC45MiA1NC44NyAtMzMuODRRNTQuMTEgLTMyLjc3IDU0LjExIC0zMS4zOFE1NC4xMSAtMjkuODcgNTUuMTAgLTI4Ljc0UTU2LjA5IC0yNy42MSA1OC4wNiAtMjYuOTdMNjYuMzUgLTI0LjMwUTcxLjU3IC0yMi42MiA3NC4xNSAtMTkuNjBRNzYuNzMgLTE2LjU5IDc2LjczIC0xMi4yNFE3Ni43MyAtOC40NyA3NC43NiAtNS41NFE3Mi43OSAtMi42MSA2OS4zNCAtMC45NlE2NS44OSAwLjcwIDYxLjMxIDAuNzBaIE05MC4xOSAwLjAwVi0zNS4zOEg3OS4yM1YtNDMuMjFIMTA5Ljk3Vi0zNS4zOEg5OS4xOFYwLjAwWiIgZmlsbD0iIzBBMjE0NSIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjUuNjEsNDIpIj48cGF0aCBkPSJNMTYuMjQgMC4wMCAwLjY0IC00My4yMUg2LjczTDE5Ljk1IC01LjIySDE4LjczTDMxLjk2IC00My4yMUgzOC4wNUwyMi41MCAwLjAwWiBNNDQuMjAgMC4wMFYtNDMuMjFINzIuMzNWLTM3Ljk5SDQ5Ljg4Vi0yNC4zMEg3MS4xN1YtMTkuMDhINDkuODhWLTUuMjJINzIuMzNWMC4wMFogTTgwLjA0IDAuMDBWLTQzLjIxSDg0LjgwTDEwOS42MiAtOC4yOUwxMDcuNDcgLTguMDZWLTQzLjIxSDExMy4yMlYwLjAwSDEwOC40Nkw4My43NSAtMzUuMTVMODUuNzIgLTM1LjM4VjAuMDBaIE0xMzEuMDggMC4wMFYtMzcuOTlIMTE5LjM2Vi00My4yMUgxNDguMzZWLTM3Ljk5SDEzNi44MlYwLjAwWiBNMTcwLjE3IDAuNzBRMTY1LjQ3IDAuNzAgMTYxLjg1IC0xLjI4UTE1OC4yMiAtMy4yNSAxNTYuMjIgLTYuNzBRMTU0LjIyIC0xMC4xNSAxNTQuMjIgLTE0LjU2Vi00My4yMUgxNTkuOTZWLTE0LjY3UTE1OS45NiAtMTEuNzIgMTYxLjI3IC05LjQzUTE2Mi41NyAtNy4xMyAxNjQuODcgLTUuODZRMTY3LjE2IC00LjU4IDE3MC4xNyAtNC41OFExNzMuMTkgLTQuNTggMTc1LjQ4IC01Ljg2UTE3Ny43NyAtNy4xMyAxNzkuMDcgLTkuNDNRMTgwLjM4IC0xMS43MiAxODAuMzggLTE0LjY3Vi00My4yMUgxODYuMTJWLTE0LjU2UTE4Ni4xMiAtMTAuMTUgMTg0LjEyIC02LjcwUTE4Mi4xMiAtMy4yNSAxNzguNTIgLTEuMjhRMTc0LjkzIDAuNzAgMTcwLjE3IDAuNzBaIE0xOTYuMTYgMC4wMFYtNDMuMjFIMjExLjQxUTIxNS43MCAtNDMuMjEgMjE4Ljk1IC00MS41OVEyMjIuMjAgLTM5Ljk2IDIyNC4wMyAtMzYuOTVRMjI1Ljg1IC0zMy45MyAyMjUuODUgLTI5Ljg3UTIyNS44NSAtMjUuMjkgMjIzLjUzIC0yMi4xMFEyMjEuMjEgLTE4LjkxIDIxNy4yNyAtMTcuNTJMMjI3LjMwIDAuMDBIMjIwLjY5TDIxMC4xMyAtMTguNzNMMjEzLjkwIC0xNi41M0gyMDEuODRWMC4wMFpNMjAxLjg0IC0yMS43NUgyMTEuNThRMjE0LjE0IC0yMS43NSAyMTYuMDUgLTIyLjc0UTIxNy45NiAtMjMuNzIgMjE5LjA0IC0yNS41OFEyMjAuMTEgLTI3LjQzIDIyMC4xMSAtMjkuODdRMjIwLjExIC0zMi4zNiAyMTkuMDQgLTM0LjE5UTIxNy45NiAtMzYuMDIgMjE2LjA1IC0zNy4wMFEyMTQuMTQgLTM3Ljk5IDIxMS41OCAtMzcuOTlIMjAxLjg0WiBNMjM0LjQ0IDAuMDBWLTQzLjIxSDI2Mi41N1YtMzcuOTlIMjQwLjEyVi0yNC4zMEgyNjEuNDFWLTE5LjA4SDI0MC4xMlYtNS4yMkgyNjIuNTdWMC4wMFogTTI4NS4xMyAwLjcwUTI4MS4wMSAwLjcwIDI3Ny41OSAtMC44NFEyNzQuMTcgLTIuMzggMjcxLjc5IC01LjA1UTI2OS40MSAtNy43MSAyNjguMzcgLTExLjAyTDI3My4zMCAtMTMuMDVRMjc0Ljg2IC04Ljg3IDI3Ny45NyAtNi42NFEyODEuMDcgLTQuNDEgMjg1LjI0IC00LjQxUTI4Ny44MCAtNC40MSAyODkuNzEgLTUuMjJRMjkxLjYyIC02LjAzIDI5Mi43MCAtNy41MVEyOTMuNzcgLTguOTkgMjkzLjc3IC0xMC45NlEyOTMuNzcgLTEzLjY5IDI5Mi4yMyAtMTUuMjhRMjkwLjcwIC0xNi44OCAyODcuNzQgLTE3LjY5TDI3OS43OSAtMjAuMTNRMjc1LjA5IC0yMS41OCAyNzIuNjAgLTI0LjcxUTI3MC4xMSAtMjcuODQgMjcwLjExIC0zMS45MFEyNzAuMTEgLTM1LjQ0IDI3MS44MiAtMzguMTRRMjczLjUzIC00MC44MyAyNzYuNTcgLTQyLjM3UTI3OS42MiAtNDMuOTEgMjgzLjUwIC00My45MVEyODcuMzkgLTQzLjkxIDI5MC41NSAtNDIuNTFRMjkzLjcxIC00MS4xMiAyOTUuOTIgLTM4Ljc3UTI5OC4xMiAtMzYuNDIgMjk5LjE2IC0zMy40MUwyOTQuMjkgLTMxLjM4UTI5Mi45MCAtMzUuMDMgMjkwLjEyIC0zNi45MlEyODcuMzMgLTM4LjgwIDI4My41NiAtMzguODBRMjgxLjI0IC0zOC44MCAyNzkuNDcgLTM4LjAyUTI3Ny43MCAtMzcuMjQgMjc2Ljc1IC0zNS43NlEyNzUuNzkgLTM0LjI4IDI3NS43OSAtMzIuMjVRMjc1Ljc5IC0yOS44NyAyNzcuMzAgLTI4LjAxUTI3OC44MSAtMjYuMTYgMjgxLjg4IC0yNS4xN0wyODkuMTMgLTIzLjAzUTI5NC4yMyAtMjEuNDYgMjk2Ljg0IC0xOC41NlEyOTkuNDUgLTE1LjY2IDI5OS40NSAtMTEuMzdRMjk5LjQ1IC03LjgzIDI5Ny42MyAtNS4xMFEyOTUuODAgLTIuMzggMjkyLjU4IC0wLjg0UTI4OS4zNiAwLjcwIDI4NS4xMyAwLjcwWiIgZmlsbD0iIzRCNkE5QiIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyLDY4KSI+PHBhdGggZD0iTTAuMTcgMC4wMCA0LjIzIC0xMS41NUg2LjQ5TDEwLjU2IDAuMDBIOC42MEw3LjcyIC0yLjU5SDMuMDJMMi4xMiAwLjAwWk0zLjU1IC00LjIySDcuMTZMNS4xMiAtMTAuMjZINS42M1ogTTE0Ljg2IDAuMDBWLTExLjU1SDE2LjY5VjAuMDBaIE0zMS43MyAwLjE5UTMwLjY0IDAuMTkgMjkuNzEgLTAuMjJRMjguNzggLTAuNjQgMjguMTMgLTEuMzVRMjcuNDggLTIuMDYgMjcuMTcgLTIuOTlMMjguNzIgLTMuNjRRMjkuMTQgLTIuNTcgMjkuOTUgLTIuMDBRMzAuNzUgLTEuNDMgMzEuODEgLTEuNDNRMzIuNDMgLTEuNDMgMzIuODkgLTEuNjJRMzMuMzYgLTEuODEgMzMuNjEgLTIuMTdRMzMuODcgLTIuNTMgMzMuODcgLTIuOTlRMzMuODcgLTMuNjMgMzMuNTEgLTQuMDBRMzMuMTUgLTQuMzcgMzIuNDYgLTQuNTlMMzAuMjkgLTUuMjdRMjguOTggLTUuNjcgMjguMzAgLTYuNTBRMjcuNjIgLTcuMzMgMjcuNjIgLTguNDVRMjcuNjIgLTkuNDIgMjguMTAgLTEwLjE2UTI4LjU4IC0xMC45MCAyOS40MyAtMTEuMzFRMzAuMjcgLTExLjczIDMxLjM2IC0xMS43M1EzMi4zOSAtMTEuNzMgMzMuMjUgLTExLjM3UTM0LjEwIC0xMS4wMSAzNC43MSAtMTAuMzdRMzUuMzIgLTkuNzMgMzUuNjAgLTguOTBMMzQuMDggLTguMjNRMzMuNzQgLTkuMTQgMzMuMDIgLTkuNjRRMzIuMzAgLTEwLjE0IDMxLjM2IC0xMC4xNFEzMC43OCAtMTAuMTQgMzAuMzUgLTkuOTRRMjkuOTEgLTkuNzUgMjkuNjcgLTkuMzlRMjkuNDMgLTkuMDIgMjkuNDMgLTguNTRRMjkuNDMgLTcuOTggMjkuNzkgLTcuNTVRMzAuMTUgLTcuMTEgMzAuODggLTYuOTBMMzIuODkgLTYuMjZRMzQuMjcgLTUuODQgMzQuOTcgLTUuMDZRMzUuNjcgLTQuMjggMzUuNjcgLTMuMTJRMzUuNjcgLTIuMTUgMzUuMTYgLTEuNDFRMzQuNjYgLTAuNjcgMzMuNzcgLTAuMjRRMzIuODkgMC4xOSAzMS43MyAwLjE5WiBNNDAuNjYgMC4wMFYtMTEuNTVINDIuNDlWLTUuMjlMNDIuMDEgLTUuNDdMNDcuMjMgLTExLjU1SDQ5LjUxTDQ0Ljg5IC02LjE0TDQ0Ljk4IC03LjQ0TDQ5LjY5IDAuMDBINDcuNTRMNDQuMTYgLTUuMjlMNDIuNDkgLTMuMzNWMC4wMFogTTU0LjAwIDAuMDBWLTExLjU1SDU1LjgzVjAuMDBaIE02MS4xNiAwLjAwVi0xMS41NUg2Mi45OVYtMS42M0g2Ny45OFYwLjAwWiBNNzIuNDYgMC4wMFYtMTEuNTVINzQuMjlWLTEuNjNINzkuMjhWMC4wMFogTTg3LjgxIDAuMTlRODYuNzIgMC4xOSA4NS43OSAtMC4yMlE4NC44NiAtMC42NCA4NC4yMSAtMS4zNVE4My41NiAtMi4wNiA4My4yNSAtMi45OUw4NC44MCAtMy42NFE4NS4yMiAtMi41NyA4Ni4wMyAtMi4wMFE4Ni44MyAtMS40MyA4Ny44OSAtMS40M1E4OC41MCAtMS40MyA4OC45NyAtMS42MlE4OS40NCAtMS44MSA4OS42OSAtMi4xN1E4OS45NSAtMi41MyA4OS45NSAtMi45OVE4OS45NSAtMy42MyA4OS41OSAtNC4wMFE4OS4yMyAtNC4zNyA4OC41NCAtNC41OUw4Ni4zNyAtNS4yN1E4NS4wNiAtNS42NyA4NC4zOCAtNi41MFE4My43MCAtNy4zMyA4My43MCAtOC40NVE4My43MCAtOS40MiA4NC4xOCAtMTAuMTZRODQuNjYgLTEwLjkwIDg1LjUxIC0xMS4zMVE4Ni4zNSAtMTEuNzMgODcuNDQgLTExLjczUTg4LjQ3IC0xMS43MyA4OS4zMyAtMTEuMzdROTAuMTggLTExLjAxIDkwLjc5IC0xMC4zN1E5MS40MCAtOS43MyA5MS42OCAtOC45MEw5MC4xNiAtOC4yM1E4OS44MiAtOS4xNCA4OS4xMCAtOS42NFE4OC4zOCAtMTAuMTQgODcuNDQgLTEwLjE0UTg2Ljg2IC0xMC4xNCA4Ni40MyAtOS45NFE4NS45OSAtOS43NSA4NS43NSAtOS4zOVE4NS41MSAtOS4wMiA4NS41MSAtOC41NFE4NS41MSAtNy45OCA4NS44NyAtNy41NVE4Ni4yMyAtNy4xMSA4Ni45NSAtNi45MEw4OC45NyAtNi4yNlE5MC4zNSAtNS44NCA5MS4wNSAtNS4wNlE5MS43NCAtNC4yOCA5MS43NCAtMy4xMlE5MS43NCAtMi4xNSA5MS4yNCAtMS40MVE5MC43NCAtMC42NyA4OS44NSAtMC4yNFE4OC45NyAwLjE5IDg3LjgxIDAuMTlaIE0xMDUuNzQgMC4xOVExMDQuNzIgMC4xOSAxMDMuOTQgLTAuMTlRMTAzLjE3IC0wLjU3IDEwMi43MyAtMS4yNlExMDIuMjggLTEuOTUgMTAyLjI4IC0yLjg3UTEwMi4yOCAtMy42NCAxMDIuNTYgLTQuMjJRMTAyLjg0IC00LjgwIDEwMy4yNiAtNS4yMlExMDMuNjggLTUuNjMgMTA0LjEwIC01LjkxUTEwNC41MiAtNi4xOCAxMDQuODAgLTYuMzRMMTA1Ljc0IC02Ljg3UTEwNi4yMSAtNy4xMyAxMDYuNjIgLTcuNDJRMTA3LjA0IC03LjcyIDEwNy4zMSAtOC4wOVExMDcuNTcgLTguNDYgMTA3LjU3IC04LjkzUTEwNy41NyAtOS40OSAxMDcuMjAgLTkuODdRMTA2LjgzIC0xMC4yNSAxMDYuMjcgLTEwLjI1UTEwNS43MSAtMTAuMjUgMTA1LjM0IC05Ljg3UTEwNC45NyAtOS41MCAxMDQuOTcgLTguOTFRMTA0Ljk3IC04LjUxIDEwNS4xNiAtOC4xMlExMDUuMzUgLTcuNzMgMTA1LjYyIC03LjQwUTEwNS45MCAtNy4wNyAxMDYuMTYgLTYuNzdMMTEyLjM2IDAuMDBIMTEwLjE3TDEwNC44NiAtNS43MlExMDQuNDkgLTYuMTIgMTA0LjEyIC02LjU4UTEwMy43NiAtNy4wNCAxMDMuNTIgLTcuNjBRMTAzLjI4IC04LjE1IDEwMy4yOCAtOC44M1ExMDMuMjggLTkuNzIgMTAzLjY5IC0xMC4zN1ExMDQuMTAgLTExLjAyIDEwNC43NyAtMTEuMzhRMTA1LjQ1IC0xMS43MyAxMDYuMjUgLTExLjczUTEwNy4wNyAtMTEuNzMgMTA3Ljc0IC0xMS4zN1ExMDguNDEgLTExLjAxIDEwOC44MCAtMTAuMzdRMTA5LjIwIC05LjczIDEwOS4yMCAtOC45M1ExMDkuMjAgLTguMDkgMTA4LjgxIC03LjQ5UTEwOC40MiAtNi44OCAxMDcuODcgLTYuNDZRMTA3LjMyIC02LjA0IDEwNi44NCAtNS43NUwxMDUuOTAgLTUuMTlRMTA1LjUyIC00Ljk4IDEwNS4xMSAtNC42NlExMDQuNzAgLTQuMzQgMTA0LjQyIC0zLjkxUTEwNC4xNCAtMy40OSAxMDQuMTQgLTIuOTBRMTA0LjE0IC0yLjE3IDEwNC42MCAtMS43N1ExMDUuMDYgLTEuMzYgMTA1LjgwIC0xLjM2UTEwNi4yOCAtMS4zNiAxMDYuNjYgLTEuNTJRMTA3LjAzIC0xLjY3IDEwNy4zMSAtMS45MlExMDcuNjAgLTIuMTcgMTA3LjgzIC0yLjQ3UTEwOC4wNSAtMi43NyAxMDguMjQgLTMuMDRMMTEwLjAzIC01LjY3SDExMS45MUwxMDkuODMgLTIuNDVRMTA5LjU5IC0yLjA4IDEwOS4yNCAtMS42MlExMDguOTAgLTEuMTYgMTA4LjQyIC0wLjc1UTEwNy45NCAtMC4zNCAxMDcuMjggLTAuMDhRMTA2LjYyIDAuMTkgMTA1Ljc0IDAuMTlaIE0xMjUuMDQgMC4wMFYtOS45MkgxMjEuOTdWLTExLjU1SDEyOS44N1YtOS45MkgxMjYuODVWMC4wMFogTTEzNC4xOCAwLjAwVi0xMS41NUgxMzguMzhRMTM5LjU1IC0xMS41NSAxNDAuNDMgLTExLjEyUTE0MS4zMSAtMTAuNzAgMTQxLjgyIC05Ljg4UTE0Mi4zMiAtOS4wNyAxNDIuMzIgLTcuOTRRMTQyLjMyIC02Ljc0IDE0MS43MiAtNS44OVExNDEuMTMgLTUuMDQgMTQwLjEyIC00LjY1TDE0Mi43OSAwLjAwSDE0MC43MUwxMzcuODcgLTUuMDRMMTM5LjA3IC00LjM0SDEzNi4wMVYwLjAwWk0xMzYuMDEgLTUuOTdIMTM4LjQyUTEzOS4wNSAtNS45NyAxMzkuNTIgLTYuMjJRMTM5Ljk4IC02LjQ2IDE0MC4yNCAtNi45MVExNDAuNDkgLTcuMzUgMTQwLjQ5IC03Ljk1UTE0MC40OSAtOC41NiAxNDAuMjQgLTkuMDBRMTM5Ljk4IC05LjQ0IDEzOS41MiAtOS42OFExMzkuMDUgLTkuOTIgMTM4LjQyIC05LjkySDEzNi4wMVogTTE0Ni4yNCAwLjAwIDE1MC4zMCAtMTEuNTVIMTUyLjU3TDE1Ni42MyAwLjAwSDE1NC42N0wxNTMuNzkgLTIuNTlIMTQ5LjA5TDE0OC4yMCAwLjAwWk0xNDkuNjIgLTQuMjJIMTUzLjIzTDE1MS4xOSAtMTAuMjZIMTUxLjcwWiBNMTYwLjk0IDAuMDBWLTExLjU1SDE2Mi43N1YwLjAwWiBNMTY4LjEwIDAuMDBWLTExLjU1SDE2OS41N0wxNzYuMDUgLTIuNjBMMTc1LjM1IC0yLjUwVi0xMS41NUgxNzcuMTZWMC4wMEgxNzUuNjlMMTY5LjI2IC05LjAxTDE2OS45MyAtOS4xM1YwLjAwWiBNMTgyLjUwIDAuMDBWLTExLjU1SDE4NC4zM1YwLjAwWiBNMTg5LjY2IDAuMDBWLTExLjU1SDE5MS4xM0wxOTcuNjEgLTIuNjBMMTk2LjkxIC0yLjUwVi0xMS41NUgxOTguNzNWMC4wMEgxOTcuMjVMMTkwLjgyIC05LjAxTDE5MS40OSAtOS4xM1YwLjAwWiBNMjA5LjQ3IDAuMTlRMjA4LjI0IDAuMTkgMjA3LjIwIC0wLjI2UTIwNi4xNSAtMC43MSAyMDUuMzcgLTEuNTFRMjA0LjU4IC0yLjMxIDIwNC4xNSAtMy4zOVEyMDMuNzIgLTQuNDggMjAzLjcyIC01Ljc4UTIwMy43MiAtNy4wNyAyMDQuMTQgLTguMTZRMjA0LjU3IC05LjI1IDIwNS4zNCAtMTAuMDVRMjA2LjEyIC0xMC44NSAyMDcuMTYgLTExLjI5UTIwOC4yMCAtMTEuNzMgMjA5LjQ0IC0xMS43M1EyMTAuNjYgLTExLjczIDIxMS42MyAtMTEuMzFRMjEyLjYwIC0xMC45MCAyMTMuMjYgLTEwLjIyUTIxMy45MyAtOS41NSAyMTQuMjMgLTguNzZMMjEyLjYwIC03Ljk3UTIxMi4yNCAtOC45MSAyMTEuNDIgLTkuNDlRMjEwLjYwIC0xMC4wNyAyMDkuNDQgLTEwLjA3UTIwOC4yOSAtMTAuMDcgMjA3LjQxIC05LjUzUTIwNi41MiAtOC45OSAyMDYuMDMgLTguMDNRMjA1LjU1IC03LjA3IDIwNS41NSAtNS43OFEyMDUuNTUgLTQuNTAgMjA2LjA1IC0zLjUzUTIwNi41NSAtMi41NiAyMDcuNDQgLTIuMDJRMjA4LjMyIC0xLjQ5IDIwOS40NyAtMS40OVEyMTAuNDMgLTEuNDkgMjExLjIzIC0xLjg4UTIxMi4wMiAtMi4yOCAyMTIuNTAgLTMuMDBRMjEyLjk5IC0zLjcyIDIxMi45OSAtNC42OFYtNS40N0wyMTMuODEgLTQuNzNIMjA5LjQ0Vi02LjI4SDIxNC44MFYtNS4xOVEyMTQuODAgLTMuOTIgMjE0LjM2IC0yLjkyUTIxMy45MyAtMS45MiAyMTMuMTkgLTEuMjJRMjEyLjQ0IC0wLjUzIDIxMS40OCAtMC4xN1EyMTAuNTIgMC4xOSAyMDkuNDcgMC4xOVoiIGZpbGw9IiMxRjZGRUIiLz48L2c+PC9nPjwvc3ZnPg==" alt="AST Ventures — AI Skills &amp; Training"></a>
-  <nav class="nav"><a href="schools.html">For Schools</a><a href="universities.html">For Universities</a><a href="programs.html">For Students</a><a href="franchise.html">Franchise</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
+  <nav class="nav"><a href="schools.html">For Schools</a><a href="colleges.html">For Colleges</a><a href="universities.html">For Universities</a><a href="programs.html">For Students</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav>
   <div class="header-cta">
     <a class="btn btn-primary btn-sm" href="contact.html">Talk to us</a>
     <button class="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
   </div>
 </div></header>
-<div class="mobile-nav"><a href="schools.html">For Schools</a><a href="universities.html">For Universities</a><a href="programs.html">For Students</a><a href="franchise.html">Franchise</a><a href="about.html">About</a><a href="contact.html">Contact</a><a class="btn btn-primary" href="contact.html">Talk to us</a></div>
+<div class="mobile-nav"><a href="schools.html">For Schools</a><a href="colleges.html">For Colleges</a><a href="universities.html">For Universities</a><a href="programs.html">For Students</a><a href="about.html">About</a><a href="contact.html">Contact</a><a class="btn btn-primary" href="contact.html">Talk to us</a></div>
 <main><div class="page" data-page="index.html" hidden><section class="hero">
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow"><span class="dot"></span> Jalandhar, Punjab</span>
       <h1>Punjab has the talent.<br>We're building the <span class="grad">AI skills infrastructure</span>.</h1>
-      <p class="lead">AST Ventures — AI Skills &amp; Training — puts the right tools, curriculum and teaching into the hands of Punjab's raw, extraordinary talent. Labs in schools. Centres on campuses. Career programs for students. Franchise centres in every district.</p>
+      <p class="lead">AST Ventures — AI Skills &amp; Training — puts the right tools, curriculum and teaching into the hands of Punjab's raw, extraordinary talent. Labs in schools. Credit-bearing courses in colleges. Centres on university campuses. Career programs for students.</p>
       <div class="btn-row" style="margin-top:30px">
         <a class="btn btn-primary" href="#models">Explore the four models <span class="arrow">&rarr;</span></a>
         <a class="btn btn-ghost" href="contact.html">Talk to us</a>
@@ -384,11 +516,25 @@ p{margin:0 0 1.1em}
       </div>
       <ul class="panel-list">
         <li><span class="ico">01</span><div><b>Schools</b><span>AI Campus-in-a-Box — lab, curriculum and teachers, run on our platform.</span></div></li>
-        <li><span class="ico">02</span><div><b>Universities</b><span>A Centre for Applied AI on your campus, badged with your institution.</span></div></li>
-        <li><span class="ico">03</span><div><b>Students &amp; Parents</b><span>The 6-month AI Career Program and Young AI Innovators weekend batches.</span></div></li>
-        <li><span class="ico">04</span><div><b>Franchise Partners</b><span>License the model and we help you set up your own AI centre.</span></div></li>
+        <li><span class="ico">02</span><div><b>Colleges</b><span>Credit-bearing AI and blockchain courses delivered under NEP 2020.</span></div></li>
+        <li><span class="ico">03</span><div><b>Universities</b><span>A Centre for Applied AI on your campus, badged with your institution.</span></div></li>
+        <li><span class="ico">04</span><div><b>Students &amp; Parents</b><span>The 6-month AI Career Program and Young AI Innovators weekend batches.</span></div></li>
       </ul>
     </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERED AT ============ -->
+<section class="strip">
+  <div class="wrap">
+    <p class="strip-label">Training and programs delivered at</p>
+    <ul class="strip-list">
+      <li>Atria University, Bengaluru</li>
+      <li>NIT Patna</li>
+      <li>NIFT Panchkula</li>
+      <li>GNA University</li>
+      <li>Lovely Professional University</li>
+    </ul>
   </div>
 </section>
 
@@ -429,7 +575,7 @@ p{margin:0 0 1.1em}
     <div class="center mx reveal">
       <span class="eyebrow"><span class="dot"></span> Four models</span>
       <h2>One platform. Four ways in.</h2>
-      <p class="lead">Whether you run a school, a university, a family's education decisions or a business you want to build — there is a way into the AST network.</p>
+      <p class="lead">Whether you run a school, a college, a university department or a family's education decisions — there is a way into the AST network.</p>
     </div>
 
     <div class="grid g2" style="margin-top:48px">
@@ -446,6 +592,21 @@ p{margin:0 0 1.1em}
         </ul>
         <div class="spacer"></div>
         <a class="btn btn-primary btn-sm" href="schools.html">See the school program <span class="arrow">&rarr;</span></a>
+      </div>
+
+      <div class="card audience reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 3.4 7.6h17.2L12 3.2Z"/><path d="M6 10.4v6.4M10 10.4v6.4M14 10.4v6.4M18 10.4v6.4"/><path d="M4.2 16.8h15.6M2.8 20.4h18.4"/></svg></span>
+        <div class="tag">For Colleges</div>
+        <h3>AI &amp; blockchain, for credit</h3>
+        <p>Credit-bearing AI and blockchain courses delivered inside your degree and diploma programs under NEP 2020 — taught by practising trainers, with your faculty trained alongside.</p>
+        <ul>
+          <li>NEP-aligned courses mapped to your credit structure</li>
+          <li>Blockchain, applied AI and data skills, taught hands-on</li>
+          <li>Faculty development so the capability stays with you</li>
+          <li>Student projects assessed on what they built</li>
+        </ul>
+        <div class="spacer"></div>
+        <a class="btn btn-primary btn-sm" href="colleges.html">See the college model <span class="arrow">&rarr;</span></a>
       </div>
 
       <div class="card audience reveal">
@@ -478,20 +639,120 @@ p{margin:0 0 1.1em}
         <a class="btn btn-primary btn-sm" href="programs.html">See the programs <span class="arrow">&rarr;</span></a>
       </div>
 
-      <div class="card audience reveal">
-        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.2 5 4.8h14l1.5 4.4a2.6 2.6 0 0 1-4.9 1.5 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-2.5-1.5Z"/><path d="M5 11.5V20h14v-8.5"/><path d="M10 20v-5h4v5"/></svg></span>
-        <div class="tag">For Franchise Partners</div>
-        <h3>Run an AST AI centre</h3>
-        <p>Buy a licence and we help you set up your AI centre — curriculum, platform, teacher training, brand and launch playbook, all included.</p>
-        <ul>
-          <li>Territory licence for your city or district</li>
-          <li>Centre setup, lab spec and launch support</li>
-          <li>Trainer certification and continuous curriculum updates</li>
-          <li>Marketing, admissions and operations playbooks</li>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACTIVE PROJECTS ============ -->
+<section class="section section--sky anchor" id="projects">
+  <div class="wrap">
+    <div class="center mx reveal">
+      <span class="eyebrow"><span class="dot"></span> Active projects</span>
+      <h2>What we are running right now</h2>
+      <p class="lead">Not a roadmap. These are programs currently being delivered, with named people accountable for them.</p>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-main">
+        <div class="project-head">
+          <span class="project-status"><span class="pulse"></span> Live</span>
+          <span class="project-meta">Under NEP 2020</span>
+        </div>
+        <h3>Blockchain course at Atria University</h3>
+        <p>A full blockchain course delivered under the National Education Policy at Atria University, Bengaluru — credit-bearing, hands-on, and taught by practitioners rather than from a textbook. Students work through the stack from first principles to deployed contracts.</p>
+        <ul class="checklist">
+          <li>Credit-bearing course delivered within the NEP framework</li>
+          <li>Fundamentals through to smart contracts and deployment</li>
+          <li>Project-assessed — students leave with work they built</li>
+          <li>Faculty involved throughout, not handed a recording</li>
         </ul>
-        <div class="spacer"></div>
-        <a class="btn btn-primary btn-sm" href="franchise.html">See the franchise model <span class="arrow">&rarr;</span></a>
+        <div class="badge-row" style="margin-top:20px">
+          <span class="badge">Blockchain</span>
+          <span class="badge">NEP 2020</span>
+          <span class="badge">Bengaluru</span>
+        </div>
       </div>
+
+      <div class="project-team">
+        <h4 class="team-title">Program team</h4>
+        <!-- Photos: drop files at assets/people/palakpreet-singh.jpg and prakash-shelar.jpg
+             (square, ~600×600). Until then the initials placeholder shows automatically. -->
+        <div class="person person--row">
+          <span class="person-photo" data-initials="PS">
+            <img src="assets/people/palakpreet-singh.jpg" alt="Palakpreet Singh" loading="lazy">
+          </span>
+          <span class="person-text">
+            <b>Palakpreet Singh</b>
+            <span class="person-role">Chief Coordinator</span>
+          </span>
+        </div>
+        <div class="person person--row">
+          <span class="person-photo" data-initials="PS">
+            <img src="assets/people/prakash-shelar.jpg" alt="Prakash Shelar" loading="lazy">
+          </span>
+          <span class="person-text">
+            <b>Prakash Shelar</b>
+            <span class="person-role">Trainer</span>
+          </span>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="contact.html" style="margin-top:20px">Run this at your campus <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SESSIONS / FIELD WORK ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="center mx reveal">
+      <span class="eyebrow"><span class="dot"></span> From the field</span>
+      <h2>Sessions we have already delivered</h2>
+      <p class="lead">Teacher training, faculty development and student workshops across campuses in Punjab, Haryana and beyond.</p>
+    </div>
+    <!-- Photos: drop files at assets/sessions/<name>.jpg (landscape, ~1200×800).
+         Until a file exists, the captioned placeholder tile shows instead.
+         Each card links out to the post about that session. -->
+    <div class="shots" style="margin-top:46px">
+      <a class="shot reveal" href="https://www.instagram.com/p/DbFOlqYEe2f/" target="_blank" rel="noopener">
+        <span class="shot-img" data-label="NIFT Panchkula">
+          <img src="assets/sessions/nift-panchkula.jpg" alt="AI and blockchain training for teachers at NIFT Panchkula" loading="lazy">
+        </span>
+        <span class="shot-body">
+          <span class="shot-tag">Teacher training</span>
+          <b>AI &amp; Blockchain for teachers</b>
+          <span class="shot-where">NIFT Panchkula <span class="ext" aria-hidden="true">&#8599;</span></span>
+        </span>
+      </a>
+      <a class="shot reveal" href="https://www.linkedin.com/posts/harman-puri_gtm-blockchain-ai-activity-7455861664610160640-uaY3" target="_blank" rel="noopener">
+        <span class="shot-img" data-label="GNA University">
+          <img src="assets/sessions/gna-university.jpg" alt="AI in fraud detection session at GNA University" loading="lazy">
+        </span>
+        <span class="shot-body">
+          <span class="shot-tag">Applied AI</span>
+          <b>AI in fraud detection</b>
+          <span class="shot-where">GNA University <span class="ext" aria-hidden="true">&#8599;</span></span>
+        </span>
+      </a>
+      <a class="shot reveal" href="https://www.linkedin.com/posts/harman-puri_blockchain-entrepreneurs-students-activity-7039162085166956545-BIbB" target="_blank" rel="noopener">
+        <span class="shot-img" data-label="LPU">
+          <img src="assets/sessions/lpu.jpg" alt="Blockchain for beginners workshop at Lovely Professional University" loading="lazy">
+        </span>
+        <span class="shot-body">
+          <span class="shot-tag">Student workshop</span>
+          <b>Blockchain for beginners</b>
+          <span class="shot-where">Lovely Professional University <span class="ext" aria-hidden="true">&#8599;</span></span>
+        </span>
+      </a>
+      <a class="shot reveal" href="https://www.instagram.com/p/CtJRVMZP0bR/" target="_blank" rel="noopener">
+        <span class="shot-img" data-label="NIT Patna">
+          <img src="assets/sessions/nit-patna.jpg" alt="First global faculty development program on blockchain, at NIT Patna" loading="lazy">
+        </span>
+        <span class="shot-body">
+          <span class="shot-tag">Faculty development</span>
+          <b>First global FDP on Blockchain</b>
+          <span class="shot-where">NIT Patna <span class="ext" aria-hidden="true">&#8599;</span></span>
+        </span>
+      </a>
     </div>
   </div>
 </section>
@@ -528,7 +789,7 @@ p{margin:0 0 1.1em}
     <div class="center mx reveal">
       <span class="eyebrow"><span class="dot"></span> How it works</span>
       <h2>From first conversation to a running centre</h2>
-      <p class="lead">The same four steps whether you are a school principal, a vice-chancellor or a franchise partner.</p>
+      <p class="lead">The same four steps whether you are a school principal, a college director or a vice-chancellor.</p>
     </div>
     <div class="steps" style="margin-top:44px">
       <div class="step reveal"><span class="num">1</span><div><h4>Assess</h4><p>We visit, look at what you already have — space, devices, staff, student mix — and map it against what the mandate and the market actually require.</p></div></div>
@@ -557,6 +818,114 @@ p{margin:0 0 1.1em}
   </div>
 </section>
 
+<!-- ============ ADVISORS ============ -->
+<section class="section anchor" id="advisors">
+  <div class="wrap">
+    <div class="center mx reveal">
+      <span class="eyebrow"><span class="dot"></span> Advisory board</span>
+      <h2>The people we take counsel from</h2>
+      <p class="lead">Academics and practitioners who have built programs, run departments and taught the students we are building this for.</p>
+    </div>
+    <!-- Photos: drop files at assets/people/<name>.jpg (square, ~600×600).
+         Until a file exists, the initials placeholder shows automatically.
+         Add each advisor's designation and institution in the person-role line. -->
+    <div class="people" style="margin-top:46px">
+      <div class="person reveal">
+        <span class="person-photo person-photo--lg" data-initials="RG">
+          <img src="assets/people/rachit-garg.jpg" alt="Dr. Rachit Garg" loading="lazy">
+        </span>
+        <b>Dr. Rachit Garg</b>
+        <span class="person-role">Advisor</span>
+      </div>
+      <div class="person reveal">
+        <span class="person-photo person-photo--lg" data-initials="AV">
+          <img src="assets/people/anita-venaik.jpg" alt="Anita Venaik" loading="lazy">
+        </span>
+        <b>Anita Venaik</b>
+        <span class="person-role">Advisor</span>
+      </div>
+      <div class="person reveal">
+        <span class="person-photo person-photo--lg" data-initials="A">
+          <img src="assets/people/ajay.jpg" alt="Prof. Ajay" loading="lazy">
+        </span>
+        <b>Prof. Ajay</b>
+        <span class="person-role">Advisor</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TALKS & MEDIA ============ -->
+<!-- Videos play only when clicked — nothing loads from YouTube until then.
+     Thumbnails come from YouTube; if one fails, a navy title tile shows instead. -->
+<section class="section section--sky-solid anchor" id="media">
+  <div class="wrap">
+    <div class="center mx reveal">
+      <span class="eyebrow"><span class="dot"></span> Talks &amp; media</span>
+      <h2>Where our work shows up</h2>
+      <p class="lead">Our founder, Harman Puri, has spent the last several years teaching this material and talking about it publicly — on television, on stage, on campuses and in print.</p>
+    </div>
+
+    <div class="videos" style="margin-top:46px">
+      <div class="video reveal" data-yt="QW3guqIiCKs">
+        <button class="video-thumb" type="button" data-label="3.0 TV" aria-label="Play video: Tokenization with Blockchain, Crypto Masters on 3.0 TV">
+          <img src="https://i.ytimg.com/vi/QW3guqIiCKs/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/QW3guqIiCKs/hqdefault.jpg" alt="" loading="lazy">
+          <span class="video-play" aria-hidden="true"></span>
+        </button>
+        <div class="video-body">
+          <span class="shot-tag">Television</span>
+          <b>Tokenization with Blockchain</b>
+          <span class="shot-where">Crypto Masters &middot; 3.0 TV</span>
+        </div>
+      </div>
+      <div class="video reveal" data-yt="w6Eyq3kaQMw">
+        <button class="video-thumb" type="button" data-label="NASSCOM" aria-label="Play video: Web3 and Metaverse Connect, the NASSCOM metaverse report launch">
+          <img src="https://i.ytimg.com/vi/w6Eyq3kaQMw/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/w6Eyq3kaQMw/hqdefault.jpg" alt="" loading="lazy">
+          <span class="video-play" aria-hidden="true"></span>
+        </button>
+        <div class="video-body">
+          <span class="shot-tag">Report launch</span>
+          <b>Web3 &amp; Metaverse Connect</b>
+          <span class="shot-where">Launching the NASSCOM metaverse report</span>
+        </div>
+      </div>
+      <div class="video reveal" data-yt="EYbAEN09uU4">
+        <button class="video-thumb" type="button" data-label="Podcast" aria-label="Play podcast episode: Blockchain, IoT and RWAs, with the Chief Product Officer of Vodafone">
+          <img src="https://i.ytimg.com/vi/EYbAEN09uU4/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/EYbAEN09uU4/hqdefault.jpg" alt="" loading="lazy">
+          <span class="video-play" aria-hidden="true"></span>
+        </button>
+        <div class="video-body">
+          <span class="shot-tag">Podcast</span>
+          <b>Blockchain, IoT &amp; RWAs</b>
+          <span class="shot-where">With the Chief Product Officer of Vodafone</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="links" style="margin-top:24px">
+      <a class="linkcard reveal" href="https://www.instagram.com/p/Dcdhk51ju_p/" target="_blank" rel="noopener">
+        <span class="linkcard-tag">TEDx <span class="pill-soon">Upcoming</span></span>
+        <b>An upcoming TEDx talk</b>
+        <span class="linkcard-note">Announcement on Instagram</span>
+        <span class="linkcard-go" aria-hidden="true">&#8599;</span>
+      </a>
+      <!-- TODO: replace "Our founder's book" with the actual book title. -->
+      <a class="linkcard reveal" href="https://amzn.in/d/0h57JFee" target="_blank" rel="noopener">
+        <span class="linkcard-tag">Book</span>
+        <b>Our founder's book</b>
+        <span class="linkcard-note">Available on Amazon</span>
+        <span class="linkcard-go" aria-hidden="true">&#8599;</span>
+      </a>
+      <a class="linkcard reveal" href="https://www.instagram.com/p/CZZDqI5tAkL/" target="_blank" rel="noopener">
+        <span class="linkcard-tag">Keynote</span>
+        <b>Speaker at BRICS CCI</b>
+        <span class="linkcard-note">BRICS Chamber of Commerce &amp; Industry</span>
+        <span class="linkcard-go" aria-hidden="true">&#8599;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PARTNERSHIPS ============ -->
 <section class="section">
   <div class="wrap">
@@ -581,7 +950,7 @@ p{margin:0 0 1.1em}
         <h3 style="margin-bottom:18px">At a glance</h3>
         <div class="row"><span class="k">Headquarters</span><span class="v">Jalandhar, Punjab</span></div>
         <div class="row"><span class="k">Focus</span><span class="v">Tier-2 &amp; tier-3 India</span></div>
-        <div class="row"><span class="k">Models</span><span class="v">Schools · Universities · Students · Franchise</span></div>
+        <div class="row"><span class="k">Models</span><span class="v">Schools · Colleges · Universities · Students</span></div>
         <div class="row"><span class="k">Languages</span><span class="v">English · Hindi · Punjabi</span></div>
         <div class="row"><span class="k">Flagship programs</span><span class="v">AI Career Program · Young AI Innovators</span></div>
         <div class="row"><span class="k">Certification</span><span class="v">NASSCOM pathway, select programs</span></div>
@@ -599,8 +968,8 @@ p{margin:0 0 1.1em}
     </div>
     <div class="faq reveal" style="margin-top:36px">
       <details open><summary>Do we need existing computer labs to start?</summary><div class="body"><p>No. We assess what you have and specify the smallest viable setup that will actually support the curriculum. Many schools start with a single room and expand once teachers are confident.</p></div></details>
-      <details><summary>Who teaches the classes — your staff or ours?</summary><div class="body"><p>Both models exist. For schools we usually train your own teachers and certify them, with our support in the classroom during the first term. For university centres and franchise centres, a mix of certified in-house trainers and AST faculty is typical.</p></div></details>
-      <details><summary>Is this only for Punjab?</summary><div class="body"><p>Punjab is where we build first and prove the model, starting from Jalandhar. The franchise model is how the network extends to other states — partners license the platform and we help them set the centre up.</p></div></details>
+      <details><summary>Who teaches the classes — your staff or ours?</summary><div class="body"><p>Both models exist. For schools we usually train your own teachers and certify them, with our support in the classroom during the first term. For college and university programs, an AST trainer leads the course while your faculty are trained alongside — as we do on the blockchain course at Atria University.</p></div></details>
+      <details><summary>Is this only for Punjab?</summary><div class="body"><p>Punjab is where we build first and prove the model, starting from Jalandhar. We already deliver well beyond it — a blockchain course under NEP at Atria University in Bengaluru, and sessions at NIFT Panchkula, GNA University and LPU.</p></div></details>
       <details><summary>What does it cost?</summary><div class="body"><p>Commercials depend on the model, the size of the cohort and what infrastructure already exists. Tell us what you have and we will send a written proposal with the full breakdown.</p></div></details>
       <details><summary>How does the NASSCOM certification work?</summary><div class="body"><p>NASSCOM issues certificates in select areas under a prior agreement. Which of your programs qualify is confirmed in writing before enrolment opens, so nobody is promised a credential that has not been signed off.</p></div></details>
     </div>
@@ -611,7 +980,7 @@ p{margin:0 0 1.1em}
   <div class="wrap">
     <div class="cta reveal">
       <h2>Punjab's next decade gets built in its classrooms.</h2>
-      <p>Tell us who you are — a school, a campus, a parent, or someone who wants to run an AI centre in their own city — and we will tell you exactly what the first ninety days look like.</p>
+      <p>Tell us who you are — a school, a college, a university department or a parent — and we will tell you exactly what the first ninety days look like.</p>
       <div class="btn-row btn-row--center" style="margin-top:26px">
         <a class="btn btn-light" href="contact.html">Start a conversation <span class="arrow">&rarr;</span></a>
         <a class="btn btn-outline-light" href="programs.html">Browse student programs</a>
@@ -743,6 +1112,135 @@ p{margin:0 0 1.1em}
     </div>
   </div>
 </section>
+</div><div class="page" data-page="colleges.html" hidden><section class="pagehero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; For Colleges</div>
+    <span class="eyebrow"><span class="dot"></span> AI &amp; blockchain, for credit</span>
+    <h1>NEP-ready courses your students<br>actually get credit for.</h1>
+    <p class="lead">Degree colleges, autonomous colleges and polytechnics can now run AI and blockchain as credit-bearing courses under NEP 2020. We deliver the course, train your faculty alongside, and assess students on what they build.</p>
+    <div class="btn-row" style="margin-top:26px">
+      <a class="btn btn-primary" href="#enquire">Discuss a course <span class="arrow">&rarr;</span></a>
+      <a class="btn btn-ghost" href="#courses">See the courses</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="center mx reveal">
+      <span class="eyebrow"><span class="dot"></span> The gap</span>
+      <h2>NEP opened the door. Most colleges have nobody to teach it.</h2>
+      <p class="lead">Multidisciplinary and skill-based credits are permitted — but AI and blockchain need people who work with these tools, and those people are not usually on a college payroll. That is the part we supply.</p>
+    </div>
+    <div class="grid g3" style="margin-top:46px">
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.2A2.2 2.2 0 0 1 6.2 3H19v14.6H6.2A2.2 2.2 0 0 0 4 19.8V5.2Z"/><path d="M4 19.8A2.2 2.2 0 0 0 6.2 22H19"/></svg></span><h3>Mapped to your credits</h3><p>Courses structured to fit your existing credit and semester framework under NEP 2020 — as a skill enhancement course, an elective or a minor track.</p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.1 13.9a3.6 3.6 0 0 0 5.4.4l2.4-2.4a3.6 3.6 0 0 0-5.1-5.1l-1.4 1.4"/><path d="M13.9 10.1a3.6 3.6 0 0 0-5.4-.4l-2.4 2.4a3.6 3.6 0 0 0 5.1 5.1l1.4-1.4"/></svg></span><h3>Taught by practitioners</h3><p>The trainer in the room works with the technology. Students get current tooling and real workflows, not slides written three syllabi ago.</p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span><h3>Your faculty trained too</h3><p>Nominated faculty sit through delivery and get a train-the-trainer track, so by the second or third cohort the course can run in-house.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sky-solid anchor" id="courses">
+  <div class="wrap">
+    <div class="center mx reveal">
+      <span class="eyebrow"><span class="dot"></span> Courses</span>
+      <h2>What we teach on campus</h2>
+      <p class="lead">Each runs as a credit-bearing course, a semester elective or a short intensive — your academic calendar decides which.</p>
+    </div>
+    <div class="grid g3" style="margin-top:44px">
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.1 13.9a3.6 3.6 0 0 0 5.4.4l2.4-2.4a3.6 3.6 0 0 0-5.1-5.1l-1.4 1.4"/><path d="M13.9 10.1a3.6 3.6 0 0 0-5.4-.4l-2.4 2.4a3.6 3.6 0 0 0 5.1 5.1l1.4-1.4"/></svg></span><h3>Blockchain</h3><p>Fundamentals, consensus, smart contracts and deployment. Currently running as a full NEP course at Atria University, Bengaluru.</p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span><h3>Applied AI</h3><p>Practical machine learning and generative AI — building, evaluating and deploying, with the judgement to know which tool fits the problem.</p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 20 6v6.1c0 4.4-3.2 7.4-8 8.7-4.8-1.3-8-4.3-8-8.7V6l8-2.8Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg></span><h3>AI in fraud detection</h3><p>Anomaly detection and risk scoring on financial data — the session we ran for GNA University, available as a full course.</p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16"/><path d="M6.5 19.5V13M11 19.5V8.4M15.5 19.5v-4.6M20 19.5V4.5"/></svg></span><h3>Data skills</h3><p>The analysis foundation most AI courses assume and few teach properly — data handling, statistics and honest interpretation.</p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span><h3>Faculty development</h3><p>FDP-format programs for your teaching staff, as delivered to teachers at NIFT Panchkula on AI and blockchain.</p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 13.9 9l5.9 1.9-5.9 1.9L12 18.7l-1.9-5.9L4.2 10.9 10.1 9 12 3.2Z"/><path d="M18.6 3v3.4M20.3 4.7h-3.4"/></svg></span><h3>Student workshops</h3><p>Short intensives that open a subject up — like Blockchain for Beginners at Lovely Professional University.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span> Proof</span>
+        <h2>Already running under NEP</h2>
+        <p class="lead">Atria University in Bengaluru runs our blockchain course as part of its NEP offering — coordinated by Palakpreet Singh and taught by Prakash Shelar.</p>
+        <ul class="checklist">
+          <li>Credit-bearing, delivered inside the university's own framework</li>
+          <li>First principles through smart contracts and deployment</li>
+          <li>Assessed on built projects, not written recall</li>
+          <li>Faculty engaged through the course, not handed a recording</li>
+        </ul>
+        <div class="btn-row" style="margin-top:24px">
+          <a class="btn btn-ghost btn-sm" href="index.html#projects">See the project <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="media-box reveal">
+        <h3 style="margin-bottom:18px">How an engagement is structured</h3>
+        <div class="row"><span class="k">Format</span><span class="v">Credit course, elective or intensive</span></div>
+        <div class="row"><span class="k">Duration</span><span class="v">One semester, or a short block</span></div>
+        <div class="row"><span class="k">Cohort size</span><span class="v">30&ndash;120 students typical</span></div>
+        <div class="row"><span class="k">Delivery</span><span class="v">On campus, in your labs</span></div>
+        <div class="row"><span class="k">Faculty</span><span class="v">Train-the-trainer included</span></div>
+        <div class="row"><span class="k">Assessment</span><span class="v">Projects &amp; portfolio</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sky">
+  <div class="wrap">
+    <div class="center mx reveal">
+      <span class="eyebrow"><span class="dot"></span> Getting started</span>
+      <h2>From first call to first class</h2>
+    </div>
+    <div class="steps" style="margin-top:44px">
+      <div class="step reveal"><span class="num">1</span><div><h4>Academic fit</h4><p>We look at your programs, the credit slots available under NEP and which cohort makes sense to start with. Usually one course, one semester.</p></div></div>
+      <div class="step reveal"><span class="num">2</span><div><h4>Course design</h4><p>You get the syllabus, session plan, lab requirements, assessment scheme and the trainer's profile in writing before anything is approved.</p></div></div>
+      <div class="step reveal"><span class="num">3</span><div><h4>Delivery</h4><p>Our trainer runs the course on your campus to your calendar, with your nominated faculty in the room throughout.</p></div></div>
+      <div class="step reveal"><span class="num">4</span><div><h4>Handover or extend</h4><p>Review the cohort's outcomes, then either certify your faculty to run it in-house or extend to the next course in the track.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sky-solid anchor" id="enquire">
+  <div class="wrap">
+    <div class="split">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span> Next step</span>
+        <h2>Talk to us about a course</h2>
+        <p class="lead">Tell us your programs and the semester you are planning for, and we will come back with a syllabus, a session plan and what it costs.</p>
+        <div class="note" style="margin-top:22px">Start with one course and one cohort. It is far easier to prove the model on a single semester than to negotiate a whole track on a slide.</div>
+      </div>
+      <div class="form-card reveal">
+        <div class="form-success" role="status"></div>
+        <form data-enquiry="college">
+          <div class="field-row">
+            <div class="field"><label for="cl-name">Your name</label><input id="cl-name" name="name" required placeholder="Full name"></div>
+            <div class="field"><label for="cl-role">Your role</label><input id="cl-role" name="role" placeholder="Principal, HoD, T&amp;P officer"></div>
+          </div>
+          <div class="field"><label for="cl-inst">College</label><input id="cl-inst" name="institution" required placeholder="College name"></div>
+          <div class="field-row">
+            <div class="field"><label for="cl-city">City / state</label><input id="cl-city" name="city" required placeholder="e.g. Jalandhar, Punjab"></div>
+            <div class="field"><label for="cl-type">Type of institution</label>
+              <select id="cl-type" name="type"><option>Degree college</option><option>Autonomous college</option><option>Polytechnic</option><option>Affiliated engineering college</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="field"><label for="cl-course">Course you have in mind</label>
+            <select id="cl-course" name="course"><option>Blockchain</option><option>Applied AI</option><option>AI in fraud detection</option><option>Data skills</option><option>Faculty development program</option><option>Student workshop</option><option>Not sure yet</option></select>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="cl-email">Email</label><input id="cl-email" type="email" name="email" required placeholder="you@college.ac.in"></div>
+            <div class="field"><label for="cl-phone">Phone</label><input id="cl-phone" type="tel" name="phone" required placeholder="+91"></div>
+          </div>
+          <div class="field"><label for="cl-msg">Which semester, and how many students?</label><textarea id="cl-msg" name="message" placeholder="Tell us the programs, the intake and the semester you are planning for."></textarea></div>
+          <button class="btn btn-primary" type="submit" style="width:100%">Send enquiry <span class="arrow">&rarr;</span></button>
+          <p class="form-note">We reply within two working days.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 </div><div class="page" data-page="universities.html" hidden><section class="pagehero">
   <div class="wrap">
     <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; For Universities</div>
@@ -791,7 +1289,7 @@ p{margin:0 0 1.1em}
           <li>Capstone work built on real briefs rather than textbook datasets</li>
           <li>Certification in select areas through the NASSCOM partnership, under prior agreement</li>
           <li>Interview preparation grounded in what they actually built</li>
-          <li>A route into the AST network — as trainers, mentors or franchise partners</li>
+          <li>A route into the AST network — as trainers, mentors or programme partners</li>
         </ul>
       </div>
     </div>
@@ -1001,124 +1499,6 @@ p{margin:0 0 1.1em}
     </div>
   </div>
 </section>
-</div><div class="page" data-page="franchise.html" hidden><section class="pagehero">
-  <div class="wrap">
-    <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Franchise</div>
-    <span class="eyebrow"><span class="dot"></span> Franchise partners</span>
-    <h1>Run the AI centre<br>your city doesn't have yet.</h1>
-    <p class="lead">Buy a licence and we help you set the centre up — curriculum, platform, teacher certification, brand and a launch playbook. You bring the city, the space and the ambition.</p>
-    <div class="btn-row" style="margin-top:26px">
-      <a class="btn btn-primary" href="#enquire">Request the franchise pack <span class="arrow">&rarr;</span></a>
-      <a class="btn btn-ghost" href="#what">What you get</a>
-    </div>
-  </div>
-</section>
-
-<section class="section anchor" id="what">
-  <div class="wrap">
-    <div class="center mx reveal">
-      <span class="eyebrow"><span class="dot"></span> The licence</span>
-      <h2>Everything except the local knowledge</h2>
-      <p class="lead">Squirrel AI proved that physical AI-learning centres scale as a network — thousands of them, in cities most tech companies never visit. The same is true here. We supply the machine; you supply the city.</p>
-    </div>
-    <div class="grid g3" style="margin-top:46px">
-      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 20 6v6.1c0 4.4-3.2 7.4-8 8.7-4.8-1.3-8-4.3-8-8.7V6l8-2.8Z"/><path d="m9 12 2.2 2.2L15.4 10"/></svg></span><h3>Territory licence</h3><p>An exclusive licence for your city or district, with agreed terms on renewal, expansion and additional centres.</p></div>
-      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.2A2.2 2.2 0 0 1 6.2 3H19v14.6H6.2A2.2 2.2 0 0 0 4 19.8V5.2Z"/><path d="M4 19.8A2.2 2.2 0 0 0 6.2 22H19"/></svg></span><h3>Curriculum &amp; platform</h3><p>The full AST curriculum for school and career programs, delivered on our platform with continuous updates as tools change.</p></div>
-      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7.5" r="3.4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/></svg></span><h3>Trainer certification</h3><p>We train and certify your trainers, then re-certify them as the curriculum evolves. Quality is the thing a network lives or dies on.</p></div>
-      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span><h3>Centre setup</h3><p>Lab specification, vendor guidance, layout, branding and signage — a written spec you can hand to a contractor.</p></div>
-      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16"/><path d="M6.5 19.5V13M11 19.5V8.4M15.5 19.5v-4.6M20 19.5V4.5"/></svg></span><h3>Launch playbook</h3><p>Admissions process, pricing guidance, local marketing assets, school outreach scripts and a first-90-days plan.</p></div>
-      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="7" r="2.6"/><circle cx="18" cy="7" r="2.6"/><circle cx="12" cy="18" r="2.6"/><path d="M7.9 8.9 10.6 16M16.1 8.9 13.4 16M8.6 7h6.8"/></svg></span><h3>Network membership</h3><p>Shared events, competitions, national showcases and access to the school and university pipelines AST builds centrally.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--sky-solid">
-  <div class="wrap">
-    <div class="split">
-      <div class="reveal">
-        <span class="eyebrow"><span class="dot"></span> Fit</span>
-        <h2>Who this works for</h2>
-        <p class="lead">This is an operating business, not a passive investment. The partners who do well are the ones present in the centre.</p>
-        <ul class="checklist">
-          <li>Education entrepreneurs already running coaching, tuition or skilling centres</li>
-          <li>School or college groups wanting a commercial AI arm alongside academics</li>
-          <li>Operators with local credibility in a tier-2 or tier-3 city</li>
-          <li>Returning professionals who want to build something at home rather than elsewhere</li>
-        </ul>
-        <div class="note" style="margin-top:24px">We do not award a licence to every applicant. Territory, operating capability and commitment to teaching quality all matter more to us than speed.</div>
-      </div>
-      <div class="media-box reveal">
-        <h3 style="margin-bottom:18px">Typical requirements</h3>
-        <div class="row"><span class="k">Space</span><span class="v">Classroom + lab, accessible location</span></div>
-        <div class="row"><span class="k">Team</span><span class="v">Centre head + trainers we certify</span></div>
-        <div class="row"><span class="k">Investment</span><span class="v">Shared in the franchise pack</span></div>
-        <div class="row"><span class="k">Ramp</span><span class="v">Setup to first cohort, typically 8&ndash;12 weeks</span></div>
-        <div class="row"><span class="k">Term</span><span class="v">Multi-year licence, renewable</span></div>
-        <div class="row"><span class="k">Support</span><span class="v">Ongoing curriculum, training, network</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="center mx reveal">
-      <span class="eyebrow"><span class="dot"></span> Process</span>
-      <h2>From enquiry to first cohort</h2>
-    </div>
-    <div class="steps" style="margin-top:44px">
-      <div class="step reveal"><span class="num">1</span><div><h4>Enquiry &amp; franchise pack</h4><p>You tell us the city and your background. We send the pack with the full commercial structure, obligations and expected investment.</p></div></div>
-      <div class="step reveal"><span class="num">2</span><div><h4>Conversation &amp; territory check</h4><p>We talk properly, confirm territory availability and both decide whether this is a fit. No pressure and no reservation fees to have the conversation.</p></div></div>
-      <div class="step reveal"><span class="num">3</span><div><h4>Agreement &amp; setup</h4><p>Licence signed, site approved, lab specified and built, brand assets issued, platform provisioned for your centre.</p></div></div>
-      <div class="step reveal"><span class="num">4</span><div><h4>Certify, launch, run</h4><p>Your trainers are certified, the launch playbook runs, admissions open, and your first cohort starts with AST support on the ground.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--sky-solid anchor" id="enquire">
-  <div class="wrap">
-    <div class="split">
-      <div class="reveal">
-        <span class="eyebrow"><span class="dot"></span> Next step</span>
-        <h2>Request the franchise pack</h2>
-        <p class="lead">Tell us where you want to build and what you have run before. We will send the pack and, if the territory is open, arrange a call.</p>
-        <ul class="checklist">
-          <li>Full commercial structure shared upfront</li>
-          <li>Territory availability confirmed before anything is signed</li>
-          <li>No fee to receive the pack or have the first conversation</li>
-        </ul>
-      </div>
-      <div class="form-card reveal">
-        <div class="form-success" role="status"></div>
-        <form data-enquiry="franchise">
-          <div class="field-row">
-            <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required placeholder="Full name"></div>
-            <div class="field"><label for="f-city">Target city / district</label><input id="f-city" name="city" required placeholder="Where you want to operate"></div>
-          </div>
-          <div class="field"><label for="f-bg">Your background</label>
-            <select id="f-bg" name="background">
-              <option>Running an education or coaching business</option>
-              <option>School or college group</option>
-              <option>Business owner, new to education</option>
-              <option>Professional planning a first venture</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field"><label for="f-space">Do you have a space identified?</label>
-            <select id="f-space" name="space"><option>Yes, already available</option><option>Identified, not committed</option><option>Not yet</option></select>
-          </div>
-          <div class="field-row">
-            <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" name="email" required placeholder="you@example.com"></div>
-            <div class="field"><label for="f-phone">Phone</label><input id="f-phone" type="tel" name="phone" required placeholder="+91"></div>
-          </div>
-          <div class="field"><label for="f-msg">Tell us about your plan</label><textarea id="f-msg" name="message" placeholder="What you run today, why this city, and the timeline you have in mind."></textarea></div>
-          <button class="btn btn-primary" type="submit" style="width:100%">Request the pack <span class="arrow">&rarr;</span></button>
-          <p class="form-note">We reply within two working days.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
 </div><div class="page" data-page="about.html" hidden><section class="pagehero">
   <div class="wrap">
     <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; About</div>
@@ -1182,13 +1562,13 @@ p{margin:0 0 1.1em}
     <div class="center mx reveal">
       <span class="eyebrow"><span class="dot"></span> The model</span>
       <h2>Four routes, one network</h2>
-      <p class="lead">Each model feeds the others. Schools create students for the career program. The career program creates trainers for franchise centres. Campuses create the credibility that opens more schools.</p>
+      <p class="lead">Each model feeds the others. Schools create students for the career program. The career program creates the trainers who teach on campuses. Campuses create the credibility that opens more schools.</p>
     </div>
     <div class="grid g4" style="margin-top:46px">
       <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5-9 5.5-9-5.5Z"/><path d="M7 12.4V17c0 1.2 2.2 2.4 5 2.4s5-1.2 5-2.4v-4.6"/><path d="M21 9.5V15"/></svg></span><h3>Schools</h3><p>AI Campus-in-a-Box — lab, curriculum and teachers, run on our platform.</p><p><a href="schools.html">See the model &rarr;</a></p></div>
+      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 3.4 7.6h17.2L12 3.2Z"/><path d="M6 10.4v6.4M10 10.4v6.4M14 10.4v6.4M18 10.4v6.4"/><path d="M4.2 16.8h15.6M2.8 20.4h18.4"/></svg></span><h3>Colleges</h3><p>Credit-bearing AI and blockchain courses delivered under NEP 2020.</p><p><a href="colleges.html">See the model &rarr;</a></p></div>
       <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V9.6L12 5l8 4.6V20"/><path d="M9.5 20v-5.2h5V20"/><path d="M2.5 20h19"/></svg></span><h3>Universities</h3><p>A Centre for Applied AI on campus, badged with your institution.</p><p><a href="universities.html">See the model &rarr;</a></p></div>
       <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 7.8 12 12.6l9.2-4.8L12 3Z"/><path d="M6.4 10.2v4.6c0 1.7 2.5 3.1 5.6 3.1s5.6-1.4 5.6-3.1v-4.6"/><path d="M21.2 7.8v5.4"/></svg></span><h3>Students</h3><p>The flagship AI Career Program and Young AI Innovators batches.</p><p><a href="programs.html">See the programs &rarr;</a></p></div>
-      <div class="card reveal"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.2 5 4.8h14l1.5 4.4a2.6 2.6 0 0 1-4.9 1.5 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-2.5-1.5Z"/><path d="M5 11.5V20h14v-8.5"/><path d="M10 20v-5h4v5"/></svg></span><h3>Franchise</h3><p>Licence the model and we help you set up your AI centre.</p><p><a href="franchise.html">See the model &rarr;</a></p></div>
     </div>
   </div>
 </section>
@@ -1203,8 +1583,8 @@ p{margin:0 0 1.1em}
         <ul class="checklist">
           <li><strong>NASSCOM</strong> — certification in select areas under a signed memorandum of understanding, confirmed programme by programme before enrolment opens</li>
           <li><strong>Schools and school groups</strong> — long-term lab, curriculum and teacher-training partnerships</li>
-          <li><strong>Universities and colleges</strong> — co-branded Centres for Applied AI</li>
-          <li><strong>Franchise partners</strong> — licensed operators extending the network city by city</li>
+          <li><strong>Universities</strong> — co-branded Centres for Applied AI</li>
+          <li><strong>Colleges and polytechnics</strong> — credit-bearing AI and blockchain courses under NEP 2020</li>
         </ul>
       </div>
       <div class="reveal">
@@ -1225,7 +1605,7 @@ p{margin:0 0 1.1em}
       <p>Not by moving talent out, but by building the infrastructure it deserves — one lab, one campus, one centre at a time.</p>
       <div class="btn-row btn-row--center" style="margin-top:26px">
         <a class="btn btn-light" href="contact.html">Work with AST <span class="arrow">&rarr;</span></a>
-        <a class="btn btn-outline-light" href="franchise.html">Build a centre in your city</a>
+        <a class="btn btn-outline-light" href="index.html#projects">See what we're running</a>
       </div>
     </div>
   </div>
@@ -1235,7 +1615,7 @@ p{margin:0 0 1.1em}
     <div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Contact</div>
     <span class="eyebrow"><span class="dot"></span> Get in touch</span>
     <h1>Tell us who you are.<br>We'll tell you what's next.</h1>
-    <p class="lead">School, campus, student, parent or future franchise partner — one form, and the right person at AST replies within two working days.</p>
+    <p class="lead">School, college, campus, student or parent — one form, and the right person at AST replies within two working days.</p>
   </div>
 </section>
 
@@ -1253,7 +1633,7 @@ p{margin:0 0 1.1em}
         <div class="grid" style="margin-top:26px;gap:16px">
           <div class="card card--flat"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9.5 12 4l9 5.5-9 5.5-9-5.5Z"/><path d="M7 12.4V17c0 1.2 2.2 2.4 5 2.4s5-1.2 5-2.4v-4.6"/><path d="M21 9.5V15"/></svg></span><h3>Schools</h3><p>Site assessments and rollout proposals for the 2026&ndash;27 mandate. <a href="schools.html">School program &rarr;</a></p></div>
           <div class="card card--flat"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 7.8 12 12.6l9.2-4.8L12 3Z"/><path d="M6.4 10.2v4.6c0 1.7 2.5 3.1 5.6 3.1s5.6-1.4 5.6-3.1v-4.6"/><path d="M21.2 7.8v5.4"/></svg></span><h3>Admissions</h3><p>Seats, fees, batch dates and campus visits. <a href="programs.html">Student programs &rarr;</a></p></div>
-          <div class="card card--flat"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 9.2 5 4.8h14l1.5 4.4a2.6 2.6 0 0 1-4.9 1.5 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-4.8 0 2.6 2.6 0 0 1-2.5-1.5Z"/><path d="M5 11.5V20h14v-8.5"/><path d="M10 20v-5h4v5"/></svg></span><h3>Franchise</h3><p>Territory availability and the franchise pack. <a href="franchise.html">Franchise model &rarr;</a></p></div>
+          <div class="card card--flat"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 3.4 7.6h17.2L12 3.2Z"/><path d="M6 10.4v6.4M10 10.4v6.4M14 10.4v6.4M18 10.4v6.4"/><path d="M4.2 16.8h15.6M2.8 20.4h18.4"/></svg></span><h3>Colleges &amp; campuses</h3><p>NEP course delivery, faculty development and campus centres. <a href="colleges.html">College model &rarr;</a></p></div>
         </div>
       </div>
 
@@ -1264,10 +1644,10 @@ p{margin:0 0 1.1em}
           <div class="field"><label for="c-type">I'm getting in touch as</label>
             <select id="c-type" name="type">
               <option>A school (principal, trustee, coordinator)</option>
-              <option>A university or college</option>
+              <option>A college or polytechnic</option>
+              <option>A university</option>
               <option>A student</option>
               <option>A parent</option>
-              <option>A prospective franchise partner</option>
               <option>An industry or hiring partner</option>
               <option>Media or something else</option>
             </select>
@@ -1306,7 +1686,7 @@ p{margin:0 0 1.1em}
   <div class="footer-grid">
     <div><img class="flogo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NDIuNTQgODguMDAiIHdpZHRoPSI1NDIuNTQiIGhlaWdodD0iODguMDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iQVNUIFZlbnR1cmVzIOKAlCBBSSBTa2lsbHMgYW5kIFRyYWluaW5nIj48Zz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImFzdGdoMiIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMzQjg2RjciLz48c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iIzFGNkZFQiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzEyM0E4RiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4OC4wMCIgaGVpZ2h0PSI4OC4wMCIgcng9IjI0LjAwIiBmaWxsPSJ1cmwoI2FzdGdoMikiLz48cGF0aCBkPSJNIDMwLjUwIDU0LjAwIEwgNTcuNTAgNTQuMDAiIHN0cm9rZT0iI0E5Q0JGRiIgc3Ryb2tlLXdpZHRoPSI5LjUwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48cGF0aCBkPSJNIDIwLjAwIDY4LjAwIEwgNDQuMDAgMjEuMDAgTCA2OC4wMCA2OC4wMCIgc3Ryb2tlPSIjRkZGRkZGIiBzdHJva2Utd2lkdGg9IjkuNTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwLjAwIiBjeT0iNjguMDAiIHI9IjkuNTAiIGZpbGw9IiNGRkZGRkYiLz48Y2lyY2xlIGN4PSI2OC4wMCIgY3k9IjY4LjAwIiByPSI5LjUwIiBmaWxsPSIjRkZGRkZGIi8+PGNpcmNsZSBjeD0iMjAuMDAiIGN5PSI2OC4wMCIgcj0iNC4wMCIgZmlsbD0iIzFGNkZFQiIvPjxjaXJjbGUgY3g9IjY4LjAwIiBjeT0iNjguMDAiIHI9IjQuMDAiIGZpbGw9IiMxRjZGRUIiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTE0LDYuMDApIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLDQyKSI+PHBhdGggZD0iTTAuNjQgMC4wMCAxNS4yNSAtNDMuMjFIMjcuMjBMNDEuODIgMC4wMEgzMi4wMkwyOS4xMiAtOC44MkgxMy4yOEwxMC4zOCAwLjAwWk0xNS43OCAtMTYuNjVIMjYuNjJMMjAuMDEgLTM3LjA2SDIyLjQ1WiBNNjEuMzEgMC43MFE1Ny4yNSAwLjcwIDUzLjY4IC0wLjc4UTUwLjExIC0yLjI2IDQ3LjUzIC00Ljk5UTQ0Ljk1IC03LjcxIDQzLjY3IC0xMS40M0w1MS4wNCAtMTQuNzNRNTIuNjYgLTExLjE5IDU1LjU0IC05LjE2UTU4LjQxIC03LjEzIDYxLjg5IC03LjEzUTYzLjc0IC03LjEzIDY1LjA4IC03LjcxUTY2LjQxIC04LjI5IDY3LjE2IC05LjMxUTY3LjkyIC0xMC4zMiA2Ny45MiAtMTEuNzJRNjcuOTIgLTEzLjIyIDY2Ljk5IC0xNC4zMFE2Ni4wNiAtMTUuMzcgNjQuMDkgLTE2LjAxTDU1LjYyIC0xOC43OVE1MC40NiAtMjAuNDcgNDcuODUgLTIzLjU4UTQ1LjI0IC0yNi42OCA0NS4yNCAtMzEuMDNRNDUuMjQgLTM0Ljg2IDQ3LjEyIC0zNy43NlE0OS4wMSAtNDAuNjYgNTIuNDAgLTQyLjI4UTU1LjgwIC00My45MSA2MC4yMCAtNDMuOTFRNjQuMDkgLTQzLjkxIDY3LjQwIC00Mi41N1E3MC43MCAtNDEuMjQgNzMuMTEgLTM4LjgwUTc1LjUyIC0zNi4zNyA3Ni43MyAtMzIuOTRMNjkuNDMgLTI5LjY0UTY4LjIxIC0zMi42NSA2NS43NyAtMzQuMzdRNjMuMzQgLTM2LjA4IDYwLjIwIC0zNi4wOFE1OC40MSAtMzYuMDggNTcuMDEgLTM1LjUwUTU1LjYyIC0zNC45MiA1NC44NyAtMzMuODRRNTQuMTEgLTMyLjc3IDU0LjExIC0zMS4zOFE1NC4xMSAtMjkuODcgNTUuMTAgLTI4Ljc0UTU2LjA5IC0yNy42MSA1OC4wNiAtMjYuOTdMNjYuMzUgLTI0LjMwUTcxLjU3IC0yMi42MiA3NC4xNSAtMTkuNjBRNzYuNzMgLTE2LjU5IDc2LjczIC0xMi4yNFE3Ni43MyAtOC40NyA3NC43NiAtNS41NFE3Mi43OSAtMi42MSA2OS4zNCAtMC45NlE2NS44OSAwLjcwIDYxLjMxIDAuNzBaIE05MC4xOSAwLjAwVi0zNS4zOEg3OS4yM1YtNDMuMjFIMTA5Ljk3Vi0zNS4zOEg5OS4xOFYwLjAwWiIgZmlsbD0iI0ZGRkZGRiIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMjUuNjEsNDIpIj48cGF0aCBkPSJNMTYuMjQgMC4wMCAwLjY0IC00My4yMUg2LjczTDE5Ljk1IC01LjIySDE4LjczTDMxLjk2IC00My4yMUgzOC4wNUwyMi41MCAwLjAwWiBNNDQuMjAgMC4wMFYtNDMuMjFINzIuMzNWLTM3Ljk5SDQ5Ljg4Vi0yNC4zMEg3MS4xN1YtMTkuMDhINDkuODhWLTUuMjJINzIuMzNWMC4wMFogTTgwLjA0IDAuMDBWLTQzLjIxSDg0LjgwTDEwOS42MiAtOC4yOUwxMDcuNDcgLTguMDZWLTQzLjIxSDExMy4yMlYwLjAwSDEwOC40Nkw4My43NSAtMzUuMTVMODUuNzIgLTM1LjM4VjAuMDBaIE0xMzEuMDggMC4wMFYtMzcuOTlIMTE5LjM2Vi00My4yMUgxNDguMzZWLTM3Ljk5SDEzNi44MlYwLjAwWiBNMTcwLjE3IDAuNzBRMTY1LjQ3IDAuNzAgMTYxLjg1IC0xLjI4UTE1OC4yMiAtMy4yNSAxNTYuMjIgLTYuNzBRMTU0LjIyIC0xMC4xNSAxNTQuMjIgLTE0LjU2Vi00My4yMUgxNTkuOTZWLTE0LjY3UTE1OS45NiAtMTEuNzIgMTYxLjI3IC05LjQzUTE2Mi41NyAtNy4xMyAxNjQuODcgLTUuODZRMTY3LjE2IC00LjU4IDE3MC4xNyAtNC41OFExNzMuMTkgLTQuNTggMTc1LjQ4IC01Ljg2UTE3Ny43NyAtNy4xMyAxNzkuMDcgLTkuNDNRMTgwLjM4IC0xMS43MiAxODAuMzggLTE0LjY3Vi00My4yMUgxODYuMTJWLTE0LjU2UTE4Ni4xMiAtMTAuMTUgMTg0LjEyIC02LjcwUTE4Mi4xMiAtMy4yNSAxNzguNTIgLTEuMjhRMTc0LjkzIDAuNzAgMTcwLjE3IDAuNzBaIE0xOTYuMTYgMC4wMFYtNDMuMjFIMjExLjQxUTIxNS43MCAtNDMuMjEgMjE4Ljk1IC00MS41OVEyMjIuMjAgLTM5Ljk2IDIyNC4wMyAtMzYuOTVRMjI1Ljg1IC0zMy45MyAyMjUuODUgLTI5Ljg3UTIyNS44NSAtMjUuMjkgMjIzLjUzIC0yMi4xMFEyMjEuMjEgLTE4LjkxIDIxNy4yNyAtMTcuNTJMMjI3LjMwIDAuMDBIMjIwLjY5TDIxMC4xMyAtMTguNzNMMjEzLjkwIC0xNi41M0gyMDEuODRWMC4wMFpNMjAxLjg0IC0yMS43NUgyMTEuNThRMjE0LjE0IC0yMS43NSAyMTYuMDUgLTIyLjc0UTIxNy45NiAtMjMuNzIgMjE5LjA0IC0yNS41OFEyMjAuMTEgLTI3LjQzIDIyMC4xMSAtMjkuODdRMjIwLjExIC0zMi4zNiAyMTkuMDQgLTM0LjE5UTIxNy45NiAtMzYuMDIgMjE2LjA1IC0zNy4wMFEyMTQuMTQgLTM3Ljk5IDIxMS41OCAtMzcuOTlIMjAxLjg0WiBNMjM0LjQ0IDAuMDBWLTQzLjIxSDI2Mi41N1YtMzcuOTlIMjQwLjEyVi0yNC4zMEgyNjEuNDFWLTE5LjA4SDI0MC4xMlYtNS4yMkgyNjIuNTdWMC4wMFogTTI4NS4xMyAwLjcwUTI4MS4wMSAwLjcwIDI3Ny41OSAtMC44NFEyNzQuMTcgLTIuMzggMjcxLjc5IC01LjA1UTI2OS40MSAtNy43MSAyNjguMzcgLTExLjAyTDI3My4zMCAtMTMuMDVRMjc0Ljg2IC04Ljg3IDI3Ny45NyAtNi42NFEyODEuMDcgLTQuNDEgMjg1LjI0IC00LjQxUTI4Ny44MCAtNC40MSAyODkuNzEgLTUuMjJRMjkxLjYyIC02LjAzIDI5Mi43MCAtNy41MVEyOTMuNzcgLTguOTkgMjkzLjc3IC0xMC45NlEyOTMuNzcgLTEzLjY5IDI5Mi4yMyAtMTUuMjhRMjkwLjcwIC0xNi44OCAyODcuNzQgLTE3LjY5TDI3OS43OSAtMjAuMTNRMjc1LjA5IC0yMS41OCAyNzIuNjAgLTI0LjcxUTI3MC4xMSAtMjcuODQgMjcwLjExIC0zMS45MFEyNzAuMTEgLTM1LjQ0IDI3MS44MiAtMzguMTRRMjczLjUzIC00MC44MyAyNzYuNTcgLTQyLjM3UTI3OS42MiAtNDMuOTEgMjgzLjUwIC00My45MVEyODcuMzkgLTQzLjkxIDI5MC41NSAtNDIuNTFRMjkzLjcxIC00MS4xMiAyOTUuOTIgLTM4Ljc3UTI5OC4xMiAtMzYuNDIgMjk5LjE2IC0zMy40MUwyOTQuMjkgLTMxLjM4UTI5Mi45MCAtMzUuMDMgMjkwLjEyIC0zNi45MlEyODcuMzMgLTM4LjgwIDI4My41NiAtMzguODBRMjgxLjI0IC0zOC44MCAyNzkuNDcgLTM4LjAyUTI3Ny43MCAtMzcuMjQgMjc2Ljc1IC0zNS43NlEyNzUuNzkgLTM0LjI4IDI3NS43OSAtMzIuMjVRMjc1Ljc5IC0yOS44NyAyNzcuMzAgLTI4LjAxUTI3OC44MSAtMjYuMTYgMjgxLjg4IC0yNS4xN0wyODkuMTMgLTIzLjAzUTI5NC4yMyAtMjEuNDYgMjk2Ljg0IC0xOC41NlEyOTkuNDUgLTE1LjY2IDI5OS40NSAtMTEuMzdRMjk5LjQ1IC03LjgzIDI5Ny42MyAtNS4xMFEyOTUuODAgLTIuMzggMjkyLjU4IC0wLjg0UTI4OS4zNiAwLjcwIDI4NS4xMyAwLjcwWiIgZmlsbD0iI0JGRDZGRiIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyLDY4KSI+PHBhdGggZD0iTTAuMTcgMC4wMCA0LjIzIC0xMS41NUg2LjQ5TDEwLjU2IDAuMDBIOC42MEw3LjcyIC0yLjU5SDMuMDJMMi4xMiAwLjAwWk0zLjU1IC00LjIySDcuMTZMNS4xMiAtMTAuMjZINS42M1ogTTE0Ljg2IDAuMDBWLTExLjU1SDE2LjY5VjAuMDBaIE0zMS43MyAwLjE5UTMwLjY0IDAuMTkgMjkuNzEgLTAuMjJRMjguNzggLTAuNjQgMjguMTMgLTEuMzVRMjcuNDggLTIuMDYgMjcuMTcgLTIuOTlMMjguNzIgLTMuNjRRMjkuMTQgLTIuNTcgMjkuOTUgLTIuMDBRMzAuNzUgLTEuNDMgMzEuODEgLTEuNDNRMzIuNDMgLTEuNDMgMzIuODkgLTEuNjJRMzMuMzYgLTEuODEgMzMuNjEgLTIuMTdRMzMuODcgLTIuNTMgMzMuODcgLTIuOTlRMzMuODcgLTMuNjMgMzMuNTEgLTQuMDBRMzMuMTUgLTQuMzcgMzIuNDYgLTQuNTlMMzAuMjkgLTUuMjdRMjguOTggLTUuNjcgMjguMzAgLTYuNTBRMjcuNjIgLTcuMzMgMjcuNjIgLTguNDVRMjcuNjIgLTkuNDIgMjguMTAgLTEwLjE2UTI4LjU4IC0xMC45MCAyOS40MyAtMTEuMzFRMzAuMjcgLTExLjczIDMxLjM2IC0xMS43M1EzMi4zOSAtMTEuNzMgMzMuMjUgLTExLjM3UTM0LjEwIC0xMS4wMSAzNC43MSAtMTAuMzdRMzUuMzIgLTkuNzMgMzUuNjAgLTguOTBMMzQuMDggLTguMjNRMzMuNzQgLTkuMTQgMzMuMDIgLTkuNjRRMzIuMzAgLTEwLjE0IDMxLjM2IC0xMC4xNFEzMC43OCAtMTAuMTQgMzAuMzUgLTkuOTRRMjkuOTEgLTkuNzUgMjkuNjcgLTkuMzlRMjkuNDMgLTkuMDIgMjkuNDMgLTguNTRRMjkuNDMgLTcuOTggMjkuNzkgLTcuNTVRMzAuMTUgLTcuMTEgMzAuODggLTYuOTBMMzIuODkgLTYuMjZRMzQuMjcgLTUuODQgMzQuOTcgLTUuMDZRMzUuNjcgLTQuMjggMzUuNjcgLTMuMTJRMzUuNjcgLTIuMTUgMzUuMTYgLTEuNDFRMzQuNjYgLTAuNjcgMzMuNzcgLTAuMjRRMzIuODkgMC4xOSAzMS43MyAwLjE5WiBNNDAuNjYgMC4wMFYtMTEuNTVINDIuNDlWLTUuMjlMNDIuMDEgLTUuNDdMNDcuMjMgLTExLjU1SDQ5LjUxTDQ0Ljg5IC02LjE0TDQ0Ljk4IC03LjQ0TDQ5LjY5IDAuMDBINDcuNTRMNDQuMTYgLTUuMjlMNDIuNDkgLTMuMzNWMC4wMFogTTU0LjAwIDAuMDBWLTExLjU1SDU1LjgzVjAuMDBaIE02MS4xNiAwLjAwVi0xMS41NUg2Mi45OVYtMS42M0g2Ny45OFYwLjAwWiBNNzIuNDYgMC4wMFYtMTEuNTVINzQuMjlWLTEuNjNINzkuMjhWMC4wMFogTTg3LjgxIDAuMTlRODYuNzIgMC4xOSA4NS43OSAtMC4yMlE4NC44NiAtMC42NCA4NC4yMSAtMS4zNVE4My41NiAtMi4wNiA4My4yNSAtMi45OUw4NC44MCAtMy42NFE4NS4yMiAtMi41NyA4Ni4wMyAtMi4wMFE4Ni44MyAtMS40MyA4Ny44OSAtMS40M1E4OC41MCAtMS40MyA4OC45NyAtMS42MlE4OS40NCAtMS44MSA4OS42OSAtMi4xN1E4OS45NSAtMi41MyA4OS45NSAtMi45OVE4OS45NSAtMy42MyA4OS41OSAtNC4wMFE4OS4yMyAtNC4zNyA4OC41NCAtNC41OUw4Ni4zNyAtNS4yN1E4NS4wNiAtNS42NyA4NC4zOCAtNi41MFE4My43MCAtNy4zMyA4My43MCAtOC40NVE4My43MCAtOS40MiA4NC4xOCAtMTAuMTZRODQuNjYgLTEwLjkwIDg1LjUxIC0xMS4zMVE4Ni4zNSAtMTEuNzMgODcuNDQgLTExLjczUTg4LjQ3IC0xMS43MyA4OS4zMyAtMTEuMzdROTAuMTggLTExLjAxIDkwLjc5IC0xMC4zN1E5MS40MCAtOS43MyA5MS42OCAtOC45MEw5MC4xNiAtOC4yM1E4OS44MiAtOS4xNCA4OS4xMCAtOS42NFE4OC4zOCAtMTAuMTQgODcuNDQgLTEwLjE0UTg2Ljg2IC0xMC4xNCA4Ni40MyAtOS45NFE4NS45OSAtOS43NSA4NS43NSAtOS4zOVE4NS41MSAtOS4wMiA4NS41MSAtOC41NFE4NS41MSAtNy45OCA4NS44NyAtNy41NVE4Ni4yMyAtNy4xMSA4Ni45NSAtNi45MEw4OC45NyAtNi4yNlE5MC4zNSAtNS44NCA5MS4wNSAtNS4wNlE5MS43NCAtNC4yOCA5MS43NCAtMy4xMlE5MS43NCAtMi4xNSA5MS4yNCAtMS40MVE5MC43NCAtMC42NyA4OS44NSAtMC4yNFE4OC45NyAwLjE5IDg3LjgxIDAuMTlaIE0xMDUuNzQgMC4xOVExMDQuNzIgMC4xOSAxMDMuOTQgLTAuMTlRMTAzLjE3IC0wLjU3IDEwMi43MyAtMS4yNlExMDIuMjggLTEuOTUgMTAyLjI4IC0yLjg3UTEwMi4yOCAtMy42NCAxMDIuNTYgLTQuMjJRMTAyLjg0IC00LjgwIDEwMy4yNiAtNS4yMlExMDMuNjggLTUuNjMgMTA0LjEwIC01LjkxUTEwNC41MiAtNi4xOCAxMDQuODAgLTYuMzRMMTA1Ljc0IC02Ljg3UTEwNi4yMSAtNy4xMyAxMDYuNjIgLTcuNDJRMTA3LjA0IC03LjcyIDEwNy4zMSAtOC4wOVExMDcuNTcgLTguNDYgMTA3LjU3IC04LjkzUTEwNy41NyAtOS40OSAxMDcuMjAgLTkuODdRMTA2LjgzIC0xMC4yNSAxMDYuMjcgLTEwLjI1UTEwNS43MSAtMTAuMjUgMTA1LjM0IC05Ljg3UTEwNC45NyAtOS41MCAxMDQuOTcgLTguOTFRMTA0Ljk3IC04LjUxIDEwNS4xNiAtOC4xMlExMDUuMzUgLTcuNzMgMTA1LjYyIC03LjQwUTEwNS45MCAtNy4wNyAxMDYuMTYgLTYuNzdMMTEyLjM2IDAuMDBIMTEwLjE3TDEwNC44NiAtNS43MlExMDQuNDkgLTYuMTIgMTA0LjEyIC02LjU4UTEwMy43NiAtNy4wNCAxMDMuNTIgLTcuNjBRMTAzLjI4IC04LjE1IDEwMy4yOCAtOC44M1ExMDMuMjggLTkuNzIgMTAzLjY5IC0xMC4zN1ExMDQuMTAgLTExLjAyIDEwNC43NyAtMTEuMzhRMTA1LjQ1IC0xMS43MyAxMDYuMjUgLTExLjczUTEwNy4wNyAtMTEuNzMgMTA3Ljc0IC0xMS4zN1ExMDguNDEgLTExLjAxIDEwOC44MCAtMTAuMzdRMTA5LjIwIC05LjczIDEwOS4yMCAtOC45M1ExMDkuMjAgLTguMDkgMTA4LjgxIC03LjQ5UTEwOC40MiAtNi44OCAxMDcuODcgLTYuNDZRMTA3LjMyIC02LjA0IDEwNi44NCAtNS43NUwxMDUuOTAgLTUuMTlRMTA1LjUyIC00Ljk4IDEwNS4xMSAtNC42NlExMDQuNzAgLTQuMzQgMTA0LjQyIC0zLjkxUTEwNC4xNCAtMy40OSAxMDQuMTQgLTIuOTBRMTA0LjE0IC0yLjE3IDEwNC42MCAtMS43N1ExMDUuMDYgLTEuMzYgMTA1LjgwIC0xLjM2UTEwNi4yOCAtMS4zNiAxMDYuNjYgLTEuNTJRMTA3LjAzIC0xLjY3IDEwNy4zMSAtMS45MlExMDcuNjAgLTIuMTcgMTA3LjgzIC0yLjQ3UTEwOC4wNSAtMi43NyAxMDguMjQgLTMuMDRMMTEwLjAzIC01LjY3SDExMS45MUwxMDkuODMgLTIuNDVRMTA5LjU5IC0yLjA4IDEwOS4yNCAtMS42MlExMDguOTAgLTEuMTYgMTA4LjQyIC0wLjc1UTEwNy45NCAtMC4zNCAxMDcuMjggLTAuMDhRMTA2LjYyIDAuMTkgMTA1Ljc0IDAuMTlaIE0xMjUuMDQgMC4wMFYtOS45MkgxMjEuOTdWLTExLjU1SDEyOS44N1YtOS45MkgxMjYuODVWMC4wMFogTTEzNC4xOCAwLjAwVi0xMS41NUgxMzguMzhRMTM5LjU1IC0xMS41NSAxNDAuNDMgLTExLjEyUTE0MS4zMSAtMTAuNzAgMTQxLjgyIC05Ljg4UTE0Mi4zMiAtOS4wNyAxNDIuMzIgLTcuOTRRMTQyLjMyIC02Ljc0IDE0MS43MiAtNS44OVExNDEuMTMgLTUuMDQgMTQwLjEyIC00LjY1TDE0Mi43OSAwLjAwSDE0MC43MUwxMzcuODcgLTUuMDRMMTM5LjA3IC00LjM0SDEzNi4wMVYwLjAwWk0xMzYuMDEgLTUuOTdIMTM4LjQyUTEzOS4wNSAtNS45NyAxMzkuNTIgLTYuMjJRMTM5Ljk4IC02LjQ2IDE0MC4yNCAtNi45MVExNDAuNDkgLTcuMzUgMTQwLjQ5IC03Ljk1UTE0MC40OSAtOC41NiAxNDAuMjQgLTkuMDBRMTM5Ljk4IC05LjQ0IDEzOS41MiAtOS42OFExMzkuMDUgLTkuOTIgMTM4LjQyIC05LjkySDEzNi4wMVogTTE0Ni4yNCAwLjAwIDE1MC4zMCAtMTEuNTVIMTUyLjU3TDE1Ni42MyAwLjAwSDE1NC42N0wxNTMuNzkgLTIuNTlIMTQ5LjA5TDE0OC4yMCAwLjAwWk0xNDkuNjIgLTQuMjJIMTUzLjIzTDE1MS4xOSAtMTAuMjZIMTUxLjcwWiBNMTYwLjk0IDAuMDBWLTExLjU1SDE2Mi43N1YwLjAwWiBNMTY4LjEwIDAuMDBWLTExLjU1SDE2OS41N0wxNzYuMDUgLTIuNjBMMTc1LjM1IC0yLjUwVi0xMS41NUgxNzcuMTZWMC4wMEgxNzUuNjlMMTY5LjI2IC05LjAxTDE2OS45MyAtOS4xM1YwLjAwWiBNMTgyLjUwIDAuMDBWLTExLjU1SDE4NC4zM1YwLjAwWiBNMTg5LjY2IDAuMDBWLTExLjU1SDE5MS4xM0wxOTcuNjEgLTIuNjBMMTk2LjkxIC0yLjUwVi0xMS41NUgxOTguNzNWMC4wMEgxOTcuMjVMMTkwLjgyIC05LjAxTDE5MS40OSAtOS4xM1YwLjAwWiBNMjA5LjQ3IDAuMTlRMjA4LjI0IDAuMTkgMjA3LjIwIC0wLjI2UTIwNi4xNSAtMC43MSAyMDUuMzcgLTEuNTFRMjA0LjU4IC0yLjMxIDIwNC4xNSAtMy4zOVEyMDMuNzIgLTQuNDggMjAzLjcyIC01Ljc4UTIwMy43MiAtNy4wNyAyMDQuMTQgLTguMTZRMjA0LjU3IC05LjI1IDIwNS4zNCAtMTAuMDVRMjA2LjEyIC0xMC44NSAyMDcuMTYgLTExLjI5UTIwOC4yMCAtMTEuNzMgMjA5LjQ0IC0xMS43M1EyMTAuNjYgLTExLjczIDIxMS42MyAtMTEuMzFRMjEyLjYwIC0xMC45MCAyMTMuMjYgLTEwLjIyUTIxMy45MyAtOS41NSAyMTQuMjMgLTguNzZMMjEyLjYwIC03Ljk3UTIxMi4yNCAtOC45MSAyMTEuNDIgLTkuNDlRMjEwLjYwIC0xMC4wNyAyMDkuNDQgLTEwLjA3UTIwOC4yOSAtMTAuMDcgMjA3LjQxIC05LjUzUTIwNi41MiAtOC45OSAyMDYuMDMgLTguMDNRMjA1LjU1IC03LjA3IDIwNS41NSAtNS43OFEyMDUuNTUgLTQuNTAgMjA2LjA1IC0zLjUzUTIwNi41NSAtMi41NiAyMDcuNDQgLTIuMDJRMjA4LjMyIC0xLjQ5IDIwOS40NyAtMS40OVEyMTAuNDMgLTEuNDkgMjExLjIzIC0xLjg4UTIxMi4wMiAtMi4yOCAyMTIuNTAgLTMuMDBRMjEyLjk5IC0zLjcyIDIxMi45OSAtNC42OFYtNS40N0wyMTMuODEgLTQuNzNIMjA5LjQ0Vi02LjI4SDIxNC44MFYtNS4xOVEyMTQuODAgLTMuOTIgMjE0LjM2IC0yLjkyUTIxMy45MyAtMS45MiAyMTMuMTkgLTEuMjJRMjEyLjQ0IC0wLjUzIDIxMS40OCAtMC4xN1EyMTAuNTIgMC4xOSAyMDkuNDcgMC4xOVoiIGZpbGw9IiM4RkI4RjciLz48L2c+PC9nPjwvc3ZnPg==" alt="AST Ventures">
       <p class="desc">AI Skills &amp; Training. We build the delivery infrastructure for AI education in Punjab and tier-2 and tier-3 India — labs, curriculum, teachers and career programs.</p></div>
-    <div><h5>Work with us</h5><a href="schools.html">For Schools</a><a href="universities.html">For Universities</a><a href="programs.html">For Students &amp; Parents</a><a href="franchise.html">Franchise Partners</a></div>
+    <div><h5>Work with us</h5><a href="schools.html">For Schools</a><a href="colleges.html">For Colleges</a><a href="universities.html">For Universities</a><a href="programs.html">For Students &amp; Parents</a></div>
     <div><h5>Company</h5><a href="about.html">About AST</a><a href="about.html">Our thesis</a><a href="contact.html">Contact</a></div>
     <div><h5>Reach us</h5><a href="mailto:hello@astventures.in">hello@astventures.in</a><a href="#">+91 98XXX XXXXX</a><a href="contact.html">Jalandhar, Punjab 144001, India</a></div>
   </div>
@@ -1371,6 +1751,44 @@ p{margin:0 0 1.1em}
       if (e.target.tagName === 'A') mnav.classList.remove('open');
     });
   }
+
+  // photo placeholders — a photo fades in only once it has actually loaded, and
+  // an <img> whose file isn't there yet is dropped, leaving the initials disc /
+  // captioned tile underneath. Add the real file at the src path and it appears.
+  // (Without JS the images simply show as normal — see .js rules in styles.css.)
+  document.documentElement.classList.add('js');
+  document.querySelectorAll('.person-photo img, .shot-img img, .video-thumb img').forEach(function (img) {
+    function fail() {
+      // video thumbs carry a smaller YouTube size to fall back to before giving up
+      var alt = img.getAttribute('data-fallback');
+      if (alt) { img.removeAttribute('data-fallback'); img.src = alt; return; }
+      if (img.parentNode) img.parentNode.removeChild(img);
+    }
+    function ok() {
+      // YouTube answers a missing maxres thumbnail with a tiny grey placeholder
+      // rather than a 404, so treat an implausibly small image as a miss too
+      if (img.getAttribute('data-fallback') && img.naturalWidth < 200) { fail(); return; }
+      img.classList.add('is-loaded');
+    }
+    img.addEventListener('load', ok);
+    img.addEventListener('error', fail);
+    if (img.complete) { img.naturalWidth > 0 ? ok() : fail(); }
+  });
+
+  // videos load only on click — nothing is requested from YouTube before that
+  document.querySelectorAll('.video').forEach(function (card) {
+    var btn = card.querySelector('.video-thumb');
+    if (!btn || !card.dataset.yt) return;
+    btn.addEventListener('click', function () {
+      var frame = document.createElement('iframe');
+      frame.className = 'video-frame';
+      frame.src = 'https://www.youtube-nocookie.com/embed/' + card.dataset.yt + '?autoplay=1&rel=0';
+      frame.title = btn.getAttribute('aria-label') || 'Video';
+      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      frame.allowFullscreen = true;
+      btn.replaceWith(frame);
+    });
+  });
 
   // reveal on scroll
   var items = document.querySelectorAll('.reveal');

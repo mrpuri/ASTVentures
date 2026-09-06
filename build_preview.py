@@ -21,8 +21,8 @@ logo = b64("assets/logo.svg", "image/svg+xml")
 logo_white = b64("assets/logo-white.svg", "image/svg+xml")
 favicon = b64("assets/favicon.svg", "image/svg+xml")
 
-NAV = [("schools.html", "For Schools"), ("universities.html", "For Universities"),
-       ("programs.html", "For Students"), ("franchise.html", "Franchise"),
+NAV = [("schools.html", "For Schools"), ("colleges.html", "For Colleges"),
+       ("universities.html", "For Universities"), ("programs.html", "For Students"),
        ("about.html", "About"), ("contact.html", "Contact")]
 
 sections = []
@@ -60,7 +60,7 @@ html = f"""<!DOCTYPE html>
   <div class="footer-grid">
     <div><img class="flogo" src="{logo_white}" alt="AST Ventures">
       <p class="desc">AI Skills &amp; Training. We build the delivery infrastructure for AI education in Punjab and tier-2 and tier-3 India — labs, curriculum, teachers and career programs.</p></div>
-    <div><h5>Work with us</h5><a href="schools.html">For Schools</a><a href="universities.html">For Universities</a><a href="programs.html">For Students &amp; Parents</a><a href="franchise.html">Franchise Partners</a></div>
+    <div><h5>Work with us</h5><a href="schools.html">For Schools</a><a href="colleges.html">For Colleges</a><a href="universities.html">For Universities</a><a href="programs.html">For Students &amp; Parents</a></div>
     <div><h5>Company</h5><a href="about.html">About AST</a><a href="about.html">Our thesis</a><a href="contact.html">Contact</a></div>
     <div><h5>Reach us</h5><a href="mailto:{EMAIL}">{EMAIL}</a><a href="#">{PHONE}</a><a href="contact.html">{ADDRESS}</a></div>
   </div>
