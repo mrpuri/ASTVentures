@@ -122,9 +122,66 @@
     });
   });
 
-  // mark current nav item
+  // mark current nav item — and its dropdown group, if it lives in one
   var here = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav a, .mobile-nav a').forEach(function (a) {
-    if (a.getAttribute('href') === here) a.classList.add('active');
+    if (a.getAttribute('href') !== here) return;
+    a.classList.add('active');
+    var group = a.closest('.nav-group');
+    if (group) group.querySelector('.nav-trigger').classList.add('active');
+  });
+
+  // nav dropdowns — CSS opens them on hover/focus; this adds click/tap and Esc
+  document.querySelectorAll('.nav-group').forEach(function (group) {
+    var trigger = group.querySelector('.nav-trigger');
+    function set(open) {
+      group.classList.toggle('open', open);
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      set(!group.classList.contains('open'));
+    });
+    group.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { set(false); trigger.focus(); }
+    });
+    document.addEventListener('click', function (e) {
+      if (!group.contains(e.target)) set(false);
+    });
+  });
+
+  // savings estimator — every figure derives from the visible inputs
+  document.querySelectorAll('[data-estimator]').forEach(function (est) {
+    var WEEKS_PER_MONTH = 52 / 12;
+    var HOURS_PER_FTE_MONTH = 48 * WEEKS_PER_MONTH;   // six-day, 48-hour week
+    var inputs = {};
+    est.querySelectorAll('[data-in]').forEach(function (el) { inputs[el.dataset.in] = el; });
+    function v(k) { return parseFloat(inputs[k].value); }
+    function out(k, text) { var o = est.querySelector('[data-out="' + k + '"]'); if (o) o.textContent = text; }
+    function res(k, text) { var o = est.querySelector('[data-res="' + k + '"]'); if (o) o.textContent = text; }
+    function trim(s) { return s.replace(/\.0+$/, '').replace(/(\.\d*?)0+$/, '$1'); }
+    function inr(n) {   // Indian grouping, lakh / crore for large sums
+      if (n >= 1e7) return '₹' + trim((n / 1e7).toFixed(n >= 1e8 ? 1 : 2)) + ' crore';
+      if (n >= 1e5) return '₹' + trim((n / 1e5).toFixed(n >= 1e6 ? 1 : 2)) + ' lakh';
+      return '₹' + Math.round(n).toLocaleString('en-IN');
+    }
+    function update() {
+      var staff = v('staff'), hours = v('hours'), cost = v('cost'),
+          billing = v('billing') * 1e5, days = v('days'), share = v('share') / 100;
+      out('staff', staff); out('hours', hours); out('cost', inr(cost));
+      out('billing', inr(billing)); out('days', days); out('share', Math.round(share * 100) + '%');
+
+      var freed = staff * hours * WEEKS_PER_MONTH * share;            // hours / month
+      var perHour = cost / HOURS_PER_FTE_MONTH;
+      var yearly = freed * perHour * 12;
+      var cash = billing / 30 * days;                                  // one-time working capital
+
+      res('hours', '~' + Math.round(freed).toLocaleString('en-IN'));
+      res('people', (freed / HOURS_PER_FTE_MONTH).toFixed(1));
+      res('money', inr(yearly));
+      res('cash', inr(cash));
+    }
+    Object.keys(inputs).forEach(function (k) { inputs[k].addEventListener('input', update); });
+    update();
   });
 })();

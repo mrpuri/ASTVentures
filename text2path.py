@@ -32,7 +32,11 @@ def build(fontpath, text, size, tracking=0.0):
             continue
         if prev is not None:
             x += kern.get((prev, gname), 0) * scale
-        pen = SVGPathPen(gs, ntos=lambda v: f"{v:.2f}")
+        # ntos (number-to-string) landed in later fontTools; fall back without it
+        try:
+            pen = SVGPathPen(gs, ntos=lambda v: f"{v:.2f}")
+        except TypeError:
+            pen = SVGPathPen(gs)
         tp = TransformPen(pen, Transform(scale, 0, 0, -scale, x, 0))
         gs[gname].draw(tp)
         d = pen.getCommands()

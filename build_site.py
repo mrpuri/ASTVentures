@@ -3,15 +3,19 @@
 import os, re
 
 SITE = "AST Ventures"
-EMAIL = "hello@astventures.in"
-PHONE = "+91 98XXX XXXXX"
+EMAIL = "palak@astventures.in"
+PHONE = "+91 98776 88718"
 ADDRESS = "Jalandhar, Punjab 144001, India"
 
 NAV = [
-    ("schools.html", "For Schools"),
-    ("colleges.html", "For Colleges"),
-    ("universities.html", "For Universities"),
-    ("programs.html", "For Students"),
+    ("Education", [
+        ("schools.html", "Schools", "AI labs, curriculum and teachers"),
+        ("colleges.html", "Colleges", "NEP credit courses in AI and blockchain"),
+        ("universities.html", "Universities", "A Centre for Applied AI on campus"),
+        ("programs.html", "Students &amp; Parents", "Career program and weekend batches"),
+    ]),
+    ("intellistudio.html", "Intellistudio"),
+    ("gcc.html", "GCCs in Punjab"),
     ("about.html", "About"),
     ("contact.html", "Contact"),
 ]
@@ -23,6 +27,11 @@ ICONS = {
     "college": '<path d="M12 3.2 3.4 7.6h17.2L12 3.2Z"/><path d="M6 10.4v6.4M10 10.4v6.4M14 10.4v6.4M18 10.4v6.4"/><path d="M4.2 16.8h15.6M2.8 20.4h18.4"/>',
     "project": '<path d="M4.5 6.4A1.9 1.9 0 0 1 6.4 4.5h3.1l1.7 2.4h6.4a1.9 1.9 0 0 1 1.9 1.9v8.7a1.9 1.9 0 0 1-1.9 1.9H6.4a1.9 1.9 0 0 1-1.9-1.9V6.4Z"/><path d="m9.6 13.4 1.9 1.9 3.4-3.9"/>',
     "chain": '<path d="M10.1 13.9a3.6 3.6 0 0 0 5.4.4l2.4-2.4a3.6 3.6 0 0 0-5.1-5.1l-1.4 1.4"/><path d="M13.9 10.1a3.6 3.6 0 0 0-5.4-.4l-2.4 2.4a3.6 3.6 0 0 0 5.1 5.1l1.4-1.4"/>',
+    "factory": '<path d="M3 20.5V10.2l5 3v-3l5 3v-3l5 3V4h3v16.5H3Z"/><path d="M6.5 17h2M11 17h2M15.5 17h2"/>',
+    "truck": '<path d="M2.8 6.2h10.6v10.2H2.8z"/><path d="M13.4 9.6h4.2l3.4 3.4v3.4h-7.6"/><circle cx="6.6" cy="17.6" r="1.9"/><circle cx="17" cy="17.6" r="1.9"/>',
+    "rupee": '<path d="M7 4.5h10M7 9h10"/><path d="M7 4.5h3.6a4.5 4.5 0 0 1 0 9H7l7.6 7"/>',
+    "receipt": '<path d="M6 3.5h12v17l-2.4-1.6-2.4 1.6-2.4-1.6-2.4 1.6L6 20.5v-17Z"/><path d="M9 8h6M9 11.5h6M9 15h3.6"/>',
+    "chat": '<path d="M4.5 5.5h15v10.2h-8.4L6.8 19.5v-3.8H4.5V5.5Z"/><path d="M8.5 9.6h7M8.5 12.3h4.5"/>',
     "chip": '<rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>',
     "book": '<path d="M4 5.2A2.2 2.2 0 0 1 6.2 3H19v14.6H6.2A2.2 2.2 0 0 0 4 19.8V5.2Z"/><path d="M4 19.8A2.2 2.2 0 0 0 6.2 22H19"/>',
     "teacher": '<circle cx="12" cy="7.5" r="3.4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
@@ -41,8 +50,22 @@ def icon(name):
 
 
 def head(title, desc, page):
-    navlinks = "".join(f'<a href="{h}">{t}</a>' for h, t in NAV)
-    mnavlinks = "".join(f'<a href="{h}">{t}</a>' for h, t in NAV)
+    navlinks, mnavlinks = [], []
+    for item in NAV:
+        if isinstance(item[1], list):
+            label, children = item
+            menu = "".join(f'<a href="{h}"><b>{t}</b><span>{d}</span></a>' for h, t, d in children)
+            navlinks.append(
+                f'<div class="nav-group"><button class="nav-trigger" type="button" aria-expanded="false">'
+                f'{label}<span class="caret" aria-hidden="true"></span></button>'
+                f'<div class="nav-menu">{menu}</div></div>')
+            mnavlinks.append(f'<span class="mnav-label">{label}</span>' +
+                             "".join(f'<a class="mnav-sub" href="{h}">{t}</a>' for h, t, _ in children))
+        else:
+            h, t = item
+            navlinks.append(f'<a href="{h}">{t}</a>')
+            mnavlinks.append(f'<a href="{h}">{t}</a>')
+    navlinks, mnavlinks = "".join(navlinks), "".join(mnavlinks)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,14 +105,21 @@ FOOTER = f"""</main>
     <div class="footer-grid">
       <div>
         <img class="flogo" src="assets/logo-white.svg" alt="AST Ventures">
-        <p class="desc">AI Skills &amp; Training. We build the delivery infrastructure for AI education in Punjab and tier-2 and tier-3 India — labs, curriculum, teachers and career programs.</p>
+        <p class="desc">AI Skills &amp; Training. AI enablement for schools, colleges and universities &mdash; proven in industry through Intellistudio and the GCCs we bring to Punjab.</p>
       </div>
       <div>
-        <h5>Work with us</h5>
-        <a href="schools.html">For Schools</a>
-        <a href="colleges.html">For Colleges</a>
-        <a href="universities.html">For Universities</a>
-        <a href="programs.html">For Students &amp; Parents</a>
+        <h5>Education</h5>
+        <a href="schools.html">Schools</a>
+        <a href="colleges.html">Colleges</a>
+        <a href="universities.html">Universities</a>
+        <a href="programs.html">Students &amp; Parents</a>
+      </div>
+      <div>
+        <h5>Industry</h5>
+        <a href="intellistudio.html">Intellistudio</a>
+        <a href="intellistudio.html#estimate">Savings estimator</a>
+        <a href="gcc.html">GCCs in Punjab</a>
+        <a href="gcc.html#how">Build&ndash;operate&ndash;transfer</a>
       </div>
       <div>
         <h5>Company</h5>
@@ -102,7 +132,7 @@ FOOTER = f"""</main>
       <div>
         <h5>Reach us</h5>
         <a href="mailto:{EMAIL}">{EMAIL}</a>
-        <a href="tel:+9198000000000">{PHONE}</a>
+        <a href="tel:+919877688718">{PHONE}</a>
         <a href="contact.html">{ADDRESS}</a>
       </div>
     </div>
@@ -119,8 +149,8 @@ FOOTER = f"""</main>
 
 
 PAGES = [
-    ("index.html", "AST Ventures — AI Skills &amp; Training | Building Punjab's next tech hub",
-     "AST Ventures builds AI skills infrastructure for Punjab and tier-2 and tier-3 India: AI labs for schools, NEP-aligned programs for colleges, Centres for Applied AI on university campuses, and career programs for students."),
+    ("index.html", "AST Ventures — AI enablement for schools, colleges and universities",
+     "AST Ventures brings AI to schools, colleges and universities in Punjab and beyond — and proves it in industry with Intellistudio, its AI platform for manufacturers, and global capability centres built in Punjab."),
     ("schools.html", "AI Campus-in-a-Box for Schools | AST Ventures",
      "Meet the CBSE AI mandate properly. AST Ventures installs the lab, the curriculum and the trained teachers, run on our platform — for schools across Punjab."),
     ("colleges.html", "NEP-aligned AI &amp; Blockchain programs for Colleges | AST Ventures",
@@ -129,6 +159,10 @@ PAGES = [
      "An industry-grade Centre for Applied AI on your campus, badged with your institution. Curriculum, labs, faculty enablement and placement-ready student projects."),
     ("programs.html", "AI Career Program &amp; Young AI Innovators | AST Ventures",
      "Learn at the AST flagship in Jalandhar: a 6-month AI Career Program for graduates and Young AI Innovators weekend batches for school students."),
+    ("intellistudio.html", "Intellistudio — the AI company brain for manufacturers | AST Ventures",
+     "Intellistudio connects a manufacturer's systems and automates the repetitive work across production, sales, procurement, finance and running account bills. Estimate the hours and money it would save your plant."),
+    ("gcc.html", "Start a GCC in Punjab | AST Ventures",
+     "Open a Global Capability Centre in Punjab. AST builds and trains the team — feasibility, hiring from partner campuses, pre-hire bootcamps on your stack, launch support and handover."),
     ("about.html", "About AST Ventures | The thesis behind AI-native education in India",
      "We are building the operating system for AI-native education in India, starting from Jalandhar, Punjab — where India's AI mandate lands first."),
     ("contact.html", "Contact AST Ventures | Jalandhar, Punjab",
